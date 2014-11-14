@@ -137,7 +137,11 @@ function ($) {
         }
 
         seriesHtml = '';
-        timestamp = dashboard.formatDate(seriesHoverInfo.time);
+        if (scope.panel.histogram) {
+          timestamp = series.formatValue(seriesHoverInfo.time);
+        } else {
+          timestamp = dashboard.formatDate(seriesHoverInfo.time);
+        }
 
         for (i = 0; i < seriesHoverInfo.length; i++) {
           series = seriesList[i];
@@ -166,8 +170,14 @@ function ($) {
         }
 
         value = series.formatValue(value);
-        timestamp = dashboard.formatDate(item.datapoint[0]);
-        group += '<div class="graph-tooltip-value">' + value + '</div>';
+
+        if (scope.panel.histogram) {
+          timestamp = series.formatValue(item.datapoint[0]);
+        } else {
+          timestamp = dashboard.formatDate(item.datapoint[0]);
+        }
+
+        group += ': <span class="graph-tooltip-value">' + value + '</span><br>';
 
         self.showTooltip(timestamp, group, pos);
       }

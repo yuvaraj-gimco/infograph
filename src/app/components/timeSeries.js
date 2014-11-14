@@ -60,6 +60,48 @@ function (_, kbn) {
     }
   };
 
+  TimeSeries.prototype.getHistogramPairs = function(fillStyle, bucketSize) {
+    var result = [];
+    if (bucketSize === null || bucketSize === 0) {
+      bucketSize = 1;
+    }
+
+    var ignoreNulls = fillStyle === 'connected' || fillStyle === 'null';
+    var nullAsZero = fillStyle === 'null as zero';
+    var values = {};
+    var currentValue;
+
+    for (var i = 0; i < this.datapoints.length; i++) {
+      currentValue = this.datapoints[i][0];
+
+      if (currentValue === null) {
+        if (ignoreNulls) { continue; }
+        if (nullAsZero) {
+          currentValue = 0;
+        }
+      }
+
+      var bucket = (Math.floor(currentValue / bucketSize)*bucketSize).toFixed(3);
+      if (bucket in values) {
+        values[bucket]++;
+      } else {
+        values[bucket] = 1;
+      }
+    }
+
+    _.forEach(_.keys(values), function(key) {
+      result.push([parseFloat(key), values[key]]);
+    });
+
+    result = result.sort(function(a, b) {
+      return a[0] - b[0];
+    });
+
+    this.stats.timeStep = bucketSize;
+
+    return result;
+  };
+
   TimeSeries.prototype.getFlotPairs = function (fillStyle) {
     var result = [];
 
