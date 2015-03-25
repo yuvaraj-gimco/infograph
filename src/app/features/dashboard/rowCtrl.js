@@ -20,8 +20,15 @@ function (angular, app, _, config) {
 
     _.defaults($scope.row,_d);
 
+    $scope.rowMeta = { spaceLeft: 12 };
+
     $scope.init = function() {
       $scope.reset_panel();
+      $scope.updateRowMeta();
+    };
+
+    $scope.updateRowMeta = function() {
+      $scope.rowMeta.spaceLeft = 12 - $scope.dashboard.rowSpan($scope.row);
     };
 
     $scope.togglePanelMenu = function(posX) {
@@ -83,6 +90,7 @@ function (angular, app, _, config) {
         yesText: 'Delete',
         onConfirm: function() {
           $scope.row.panels = _.without($scope.row.panels, panel);
+          $scope.updateRowMeta();
         }
       });
     };
@@ -145,45 +153,36 @@ function (angular, app, _, config) {
     return function(scope, element) {
       function updateWidth() {
         element[0].style.width = ((scope.panel.span / 1.2) * 10) + '%';
+        scope.updateRowMeta();
       }
 
       scope.$watch('panel.span', updateWidth);
     };
   });
 
-  module.directive('panelDropZone', function() {
-    return function(scope, element) {
-      scope.$on("ANGULAR_DRAG_START", function() {
-        var dropZoneSpan = 12 - scope.dashboard.rowSpan(scope.row);
-
-        if (dropZoneSpan > 0) {
-          element.find('.panel-container').css('height', scope.row.height);
-          element[0].style.width = ((dropZoneSpan / 1.2) * 10) + '%';
-          element.show();
-        }
-      });
-
-      scope.$on("ANGULAR_DRAG_END", function() {
-        element.hide();
-      });
-    };
-  });
-
   module.directive('panelGhost', function() {
     return function(scope, element) {
       function updateWidth() {
-        var spanLeft = 12 - scope.dashboard.rowSpan(scope.row);
-        if (spanLeft > 1) {
+        console.log('rowMeta.spaceLeft', scope.rowMeta.spaceLeft);
+        if (scope.rowMeta.spaceLeft > 0) {
           element.show();
-          element.find('.panel-container').css('height', scope.row.height);
-          element[0].style.width = ((spanLeft / 1.2) * 10) + '%';
         } else {
           element.hide();
+          return;
         }
+
+        element.find('.panel-container').css('height', scope.row.height);
+        element[0].style.width = ((scope.rowMeta.spaceLeft / 1.2) * 10) + '%';
       }
 
-      updateWidth();
-      scope.$on('dashboard-panel-span-updated', updateWidth);
+      scope.$watchGroup(['rowMeta.spaceLeft', 'row.height'], updateWidth);
+      scope.$on("ANGULAR_DRAG_START", function() {
+        element.addClass('panel-ghost-dragging');
+      });
+
+      scope.$on("ANGULAR_DRAG_END", function() {
+        element.removeClass('panel-ghost-dragging');
+      });
     };
   });
 

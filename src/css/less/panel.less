@@ -162,19 +162,35 @@
   }
 }
 
-.panel-drop-zone {
-  display: none;
-  .panel-container {
-    border: 1px solid @grayDark;
-  }
-}
-
 .panel-ghost{
-  width: 100%;
+  display: none;
+
+  .panel-ghost-dropzone {
+    display: none;
+    text-align: center;
+  }
+
+  &.panel-ghost-dragging {
+    .panel-container {
+      visibility: visible;
+    }
+
+    .panel-ghost-controls { display: none; }
+    .panel-ghost-dropzone { display: block; }
+  }
+
+  &:hover {
+    .panel-container {
+      visibility: visible;
+    }
+  }
+
   .panel-container {
+    visibility: hidden;
     border: none;
     background: transparent;
   }
+
   .panel-ghost-list {
     margin: 10px 0 10px 20px;
   }
