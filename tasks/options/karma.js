@@ -1,4 +1,6 @@
 module.exports = function(config) {
+  'use strict';
+
   return {
     dev: {
       configFile: '<%= srcDir %>/test/karma.conf.js',
@@ -14,7 +16,11 @@ module.exports = function(config) {
     },
     coveralls: {
       configFile: '<%= srcDir %>/test/karma.conf.js',
-      reporters: ['dots','coverage','coveralls'],
+      singleRun: true,
+
+      plugins: ['karma-*', '../../../tasks/karma/coveralls'],
+
+      reporters: ['dots','coverage','gf-coveralls'],
       preprocessors: {
         'public/app/**/*.js': ['coverage']
       },

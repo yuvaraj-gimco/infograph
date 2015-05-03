@@ -10,6 +10,7 @@
     "url": "http://github.com/torkelo/grafana.git"
   },
   "devDependencies": {
+    "coveralls": "^2.11.2",
     "expect.js": "~0.2.0",
     "glob": "~3.2.7",
     "grunt": "~0.4.0",
