@@ -127,7 +127,7 @@ function (angular, _, kbn) {
 
     this.validateVariableSelectionState = function(variable) {
       if (!variable.current) {
-        return self.setVariableValue(variable, variable.options[0]);
+        return self.setVariableValue(variable, variable.options[_.keys(variable.options)[0]]);
       }
 
       if (_.isArray(variable.current.value)) {
@@ -141,7 +141,7 @@ function (angular, _, kbn) {
           }
         }
       } else {
-        var currentOption = _.findWhere(variable.options, { text: variable.current.text });
+        var currentOption = variable.options[variable.current.value];
         if (currentOption) {
           return self.setVariableValue(variable, currentOption);
         }
@@ -166,10 +166,7 @@ function (angular, _, kbn) {
 
     this.updateOptionsFromMetricFindQuery = function(variable, datasource) {
       return datasource.metricFindQuery(variable.query).then(function (results) {
-        variable.options = self.metricNamesToVariableValues(variable, results);
-        if (variable.includeAll) {
-          self.addAllOption(variable);
-        }
+        self.metricNamesToVariableValues(variable, results);
         return datasource;
       });
     };
@@ -204,12 +201,13 @@ function (angular, _, kbn) {
           }
         }
 
-        options[value] = value;
+        options[value] = { text: value, value: value };
       }
 
-      return _.map(_.keys(options).sort(), function(key) {
-        return { text: key, value: key };
-      });
+      variable.options = options;
+      if (variable.includeAll) {
+        self.addAllOption(variable);
+      }
     };
 
     this.addAllOption = function(variable) {
@@ -230,7 +228,7 @@ function (angular, _, kbn) {
         allValue += '}';
       }
 
-      variable.options.unshift({text: 'All', value: allValue});
+      variable.options['All'] = {text: 'All', value: allValue};
     };
 
   });

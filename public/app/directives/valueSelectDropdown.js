@@ -16,7 +16,9 @@ function (angular, app, _) {
         vm.oldVariableText = vm.variable.current.text;
         vm.highlightIndex = -1;
 
-        vm.options = vm.variable.options;
+        vm.options = _.map(vm.variable.options, function(option) { return option; });
+        vm.options = _.sortBy(vm.options, 'text');
+
         vm.selectedValues = _.filter(vm.options, {selected: true});
 
         vm.tags = _.map(vm.variable.tags, function(value) {
@@ -82,9 +84,9 @@ function (angular, app, _) {
         tagValuesPromise.then(function(values) {
           tag.values = values;
           tag.valuesText = values.join(' + ');
-          _.each(vm.options, function(option) {
-            if (_.indexOf(tag.values, option.value) !== -1) {
-              option.selected = tag.selected;
+          _.each(tag.values, function(value) {
+            if (vm.variable.options[value]) {
+              vm.variable.options[value].selected = tag.selected;
             }
           });
 
