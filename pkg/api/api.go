@@ -141,6 +141,10 @@ func Register(r *macaron.Macaron) {
 
 		// metrics
 		r.Get("/metrics/test", GetTestMetrics)
+
+		// share integrations
+		r.Post("/integrations/slack/share", wrap(ShareWithSlack))
+
 	}, reqSignedIn)
 
 	// admin api

@@ -9,7 +9,7 @@ function (angular, _, require, config) {
 
   var module = angular.module('grafana.controllers');
 
-  module.controller('ShareModalCtrl', function($scope, $rootScope, $location, $timeout, timeSrv, $element, templateSrv, linkSrv) {
+  module.controller('ShareModalCtrl', function($scope, $location, timeSrv, $element, templateSrv, linkSrv, backendSrv) {
 
     $scope.options = { forCurrent: true, includeTemplateVars: true, theme: 'current' };
     $scope.editor = { index: 0 };
@@ -29,6 +29,8 @@ function (angular, _, require, config) {
       if (!$scope.dashboardMeta.isSnapshot) {
         $scope.tabs.push({title: 'Snapshot sharing', src: 'shareSnapshot.html'});
       }
+
+      $scope.tabs.push({title: 'Slack', src: 'shareSlack.html'});
 
       $scope.buildUrl();
     };
@@ -78,6 +80,16 @@ function (angular, _, require, config) {
       $scope.imageUrl = soloUrl.replace('/dashboard', '/render/dashboard');
       $scope.imageUrl += '&width=1000';
       $scope.imageUrl += '&height=500';
+    };
+
+    $scope.shareSlack = function() {
+      var options = {
+        imageUrl: $scope.imageUrl,
+        shareUrl: $scope.shareUrl,
+      };
+
+      backendSrv.post('/api/integrations/slack/share', options, function() {
+      });
     };
 
   });

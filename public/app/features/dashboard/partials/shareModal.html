@@ -106,6 +106,20 @@
 	</div>
 </script>
 
+<script type="text/ng-template" id="shareSlack.html">
+	<div class="share-modal-big-icon">
+		<i class="fa fa-external-link"></i>
+	</div>
+
+	<div ng-include src="'shareLinkOptions.html'"></div>
+	<div class="gf-form">
+		<div class="gf-form-row">
+			<button class="btn btn-inverse" ng-click="shareSlack()">Share</button>
+		</div>
+	</div>
+</script>
+
+
 <script type="text/ng-template" id="shareSnapshot.html">
 	<div class="ng-cloak" ng-cloak ng-controller="ShareSnapshotCtrl">
 		<div class="share-modal-big-icon">
