@@ -7,12 +7,13 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/grafana/grafana/pkg/api/dtos"
 	"github.com/grafana/grafana/pkg/log"
 	"github.com/grafana/grafana/pkg/middleware"
 	"github.com/grafana/grafana/pkg/util"
 )
 
-func ShareWithSlack(c *middleware.Context) Response {
+func ShareWithSlack(c *middleware.Context, cmd dtos.ShareWithIntegrationCommand) Response {
 	webhookUrl := "https://hooks.slack.com/services/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"
 
 	message := util.DynMap{
@@ -22,9 +23,9 @@ func ShareWithSlack(c *middleware.Context) Response {
 		"attachments": []util.DynMap{
 			util.DynMap{
 				"title":      "Cool Graph from Grafana",
-				"title_link": "http://play.grafana.org",
+				"title_link": cmd.ShareUrl,
 				"color":      "#EF843C",
-				"image_url":  "http://grafana.org/assets/img/annotated_graph2.png",
+				"image_url":  cmd.ImageUrl,
 			},
 		},
 	}
@@ -47,12 +48,12 @@ func ShareWithSlack(c *middleware.Context) Response {
 		return ApiError(500, "Slack response failed to parse", err)
 	}
 
-	var resData map[string]interface{}
-	if err := json.Unmarshal(body, &resData); err != nil {
-		return ApiError(500, "Failed to parse slack response to json", err)
-	}
+	// var resData map[string]interface{}
+	// if err := json.Unmarshal(body, &resData); err != nil {
+	// 	return ApiError(500, "Failed to parse slack response to json", err)
+	// }
+	//
+	log.Info("Slack response: %s", string(body))
 
-	log.Info("Slack response: %s", resData["error"])
-
-	return Json(200, resData)
+	return ApiSuccess("Message sent to slack")
 }

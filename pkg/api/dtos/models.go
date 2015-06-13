@@ -85,3 +85,9 @@ func GetGravatarUrl(text string) string {
 	hasher.Write([]byte(strings.ToLower(text)))
 	return fmt.Sprintf("https://secure.gravatar.com/avatar/%x?s=90&default=mm", hasher.Sum(nil))
 }
+
+type ShareWithIntegrationCommand struct {
+	Message  string `json:"message"`
+	ShareUrl string `json:"shareUrl"`
+	ImageUrl string `json:"imageUrl"`
+}

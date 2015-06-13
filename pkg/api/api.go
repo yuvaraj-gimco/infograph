@@ -143,7 +143,7 @@ func Register(r *macaron.Macaron) {
 		r.Get("/metrics/test", GetTestMetrics)
 
 		// share integrations
-		r.Post("/integrations/slack/share", wrap(ShareWithSlack))
+		r.Post("/integrations/slack/share", bind(dtos.ShareWithIntegrationCommand{}), wrap(ShareWithSlack))
 
 	}, reqSignedIn)
 
