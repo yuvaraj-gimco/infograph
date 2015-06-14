@@ -8,12 +8,27 @@ import (
 	"time"
 
 	"github.com/grafana/grafana/pkg/api/dtos"
+	"github.com/grafana/grafana/pkg/components/imguploader"
 	"github.com/grafana/grafana/pkg/log"
 	"github.com/grafana/grafana/pkg/middleware"
+	"github.com/grafana/grafana/pkg/setting"
 	"github.com/grafana/grafana/pkg/util"
 )
 
 func ShareWithSlack(c *middleware.Context, cmd dtos.ShareWithIntegrationCommand) Response {
+
+	uploader := imguploader.NewS3Uploader(
+		setting.S3TempImageStoreBucketUrl,
+		setting.S3TempImageStoreAccessKey,
+		setting.S3TempImageStoreSecretKey)
+
+	imageUrl, err := uploader.Upload(cmd.ImageUrl)
+	if err != nil {
+		return ApiError(500, "Failed to upload image to s3", err)
+	}
+
+	log.Info("ImageUrl: %s", imageUrl)
+
 	webhookUrl := "https://hooks.slack.com/services/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"
 
 	message := util.DynMap{
@@ -25,7 +40,7 @@ func ShareWithSlack(c *middleware.Context, cmd dtos.ShareWithIntegrationCommand)
 				"title":      "Cool Graph from Grafana",
 				"title_link": cmd.ShareUrl,
 				"color":      "#EF843C",
-				"image_url":  cmd.ImageUrl,
+				"image_url":  imageUrl,
 			},
 		},
 	}

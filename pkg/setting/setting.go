@@ -116,6 +116,11 @@ var (
 
 	// SMTP email settings
 	Smtp SmtpSettings
+
+	// S3 temp image store
+	S3TempImageStoreBucketUrl string
+	S3TempImageStoreAccessKey string
+	S3TempImageStoreSecretKey string
 )
 
 type CommandLineArgs struct {
@@ -405,6 +410,11 @@ func NewConfigContext(args *CommandLineArgs) {
 	analytics := Cfg.Section("analytics")
 	ReportingEnabled = analytics.Key("reporting_enabled").MustBool(true)
 	GoogleAnalyticsId = analytics.Key("google_analytics_ua_id").String()
+
+	s3temp := Cfg.Section("s3-temp-image-store")
+	S3TempImageStoreBucketUrl = s3temp.Key("bucket_url").String()
+	S3TempImageStoreAccessKey = s3temp.Key("access_key").String()
+	S3TempImageStoreSecretKey = s3temp.Key("secret_key").String()
 
 	readSessionConfig()
 	readSmtpSettings()
