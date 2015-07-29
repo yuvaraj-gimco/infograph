@@ -1,0 +1,90 @@
+
+id: #A
+query: select mean(value) from cpu
+ds: 1  (influxdb)
+type: other-backend
+
+id: #B
+query: select mean(value) from cpu
+ds: 1  (influxdb)
+type: other-backend
+
+id: #C
+query: A# -> divideBySeries(#B)
+type: meta
+ds: meta
+
+id: #A
+query: select mean(value) from cpu
+ds: 1  (opentsdb)
+type: other-backend
+
+MetricRequest {
+  Queries: {
+    "A": {
+      dsId: 2,
+      query: "select mean(value)",
+      type: other-tsdb (influxdb),
+    }
+    "B": {
+      dsId: 3,
+      query: "prod.counter.count",
+      type: other-tsdb (graphite),
+    }
+    "C": {
+      query: "#A -> percentOf(#B) -> scale(100)",
+      type: meta,
+    }
+  }
+}
+
+type BatchGroup {
+  datasource,
+  queries[],
+  children[],
+  depends[]
+}
+
+type QueryExecutor interface {
+  Execute(queries, context)
+}
+
+type MetricQueryContext struct {
+  TimeRange
+  Queries[]
+  Results[]
+  Lock
+}
+
+fun Process (req MetricRequest) {
+  result := MetricRequestResult
+
+  batchGroups := getBatchGroups(req)
+  for batch in batchGroups {
+    go batch.Process(result)
+  }
+
+  batchGroups.Wait()
+}
+
+fun (bs BatchGroup) Process(result) {
+  for dep in depends {
+    wait for dep
+  }
+
+  executor := getExecutor(bs.datasource)
+  executor.Execute(bs.queries, context)
+
+  for child in children {
+    child.Add(1)
+  }
+}
+
+type InfluxDBQueryExecutor struct {
+  dsInfo
+}
+
+func (i *InfluxDBQueryExecutor) Execute(queries[], context) {
+
+}
+
