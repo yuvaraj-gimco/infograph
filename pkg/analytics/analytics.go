@@ -1,4 +1,4 @@
-package query
+package queryengine
 
 import "sync"
 
@@ -15,12 +15,12 @@ func HandleRequest(req *Request) error {
 		Queries:   req.Queries,
 	}
 
-	_, batchGroups := GetBatchGroups(req)
+	_, batchGroups := GetBatchGroups(req, context)
 
 	return nil
 }
 
-func GetBatchGroups(req *Request) (error, []*BatchGroup) {
+func GetBatchGroups(req *Request, context *QueryContext) (error, []*BatchGroup) {
 	return nil, nil
 }
 
@@ -28,10 +28,23 @@ type TimeRange struct {
 }
 
 type Query struct {
-	Query         string
-	DataSourcesId int64
-	Results       []*TimeSeries
-	Exclude       bool
+	Query      string
+	DataSource *DataSourceInfo
+	Results    []*TimeSeries
+	Exclude    bool
+}
+
+type DataSourceInfo struct {
+	Id                int64
+	Name              string
+	Type              string
+	Url               string
+	Password          string
+	User              string
+	Database          string
+	BasicAuth         bool
+	BasicAuthUser     string
+	BasicAuthPassword string
 }
 
 type QueryContext struct {
