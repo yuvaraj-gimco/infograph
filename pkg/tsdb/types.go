@@ -6,7 +6,15 @@ type Request struct {
 	TimeRange     TimeRange
 	MaxDataPoints int
 	Queries       QuerySlice
-	Results       TimeSeriesSlice
+}
+
+type Response struct {
+	BatchTimings []*BatchTiming
+	Results      map[string]*QueryResult
+}
+
+type BatchTiming struct {
+	TimeElapsed int64
 }
 
 type TimeRange struct {
@@ -14,7 +22,6 @@ type TimeRange struct {
 
 type DataSourceInfo struct {
 	Id                int64
-	Meta              bool
 	Name              string
 	Type              string
 	Url               string
@@ -27,16 +34,28 @@ type DataSourceInfo struct {
 }
 
 type QueryContext struct {
-	TimeRange TimeRange
-	Queries   map[string]*Query
-	Lock      sync.RWMutex
+	TimeRange   TimeRange
+	Queries     QuerySlice
+	Results     map[string]*QueryResult
+	ResultsChan chan *BatchResult
+	Lock        sync.RWMutex
+	BatchWaits  sync.WaitGroup
 }
 
-type QueryExecutor interface {
-	Execute(query *Query, context *QueryContext) error
+type BatchResult struct {
+	Error        error
+	Timings      *BatchTiming
+	QueryResults map[string]*QueryResult
+}
+
+type QueryResult struct {
+	Error  error
+	RefId  string
+	Series TimeSeriesSlice
 }
 
 type TimeSeries struct {
+	Name string
 }
 
 type TimeSeriesSlice []*TimeSeries

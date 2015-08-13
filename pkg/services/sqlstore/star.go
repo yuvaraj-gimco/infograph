@@ -37,7 +37,6 @@ func StarDashboard(cmd *m.StarDashboardCommand) error {
 	}
 
 	return inTransaction(func(sess *xorm.Session) error {
-
 		entity := m.Star{
 			UserId:      cmd.UserId,
 			DashboardId: cmd.DashboardId,

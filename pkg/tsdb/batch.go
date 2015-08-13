@@ -1,12 +1,10 @@
 package tsdb
 
-import "sync"
-
 type Batch struct {
 	DataSourceId int64
 	Queries      QuerySlice
-	Depends      []*sync.WaitGroup
-	Done         sync.WaitGroup
+	Depends      map[string]bool
+	Done         bool
 }
 
 type BatchSlice []*Batch
@@ -15,18 +13,29 @@ func newBatch(dsId int64, queries QuerySlice) *Batch {
 	return &Batch{
 		DataSourceId: dsId,
 		Queries:      queries,
+		Depends:      make(map[string]bool),
 	}
 }
 
-func (bg *Batch) process() error {
-	for _, dep := range bg.Depends {
-		dep.Wait()
-	}
-	return nil
+func (bg *Batch) process(context *QueryContext) {
+	executor := getExecutorFor(bg.Queries[0].DataSource)
+	res := executor.Execute(bg.Queries, context)
+	bg.Done = true
+	context.ResultsChan <- res
 }
 
 func (bg *Batch) addQuery(query *Query) {
 	bg.Queries = append(bg.Queries, query)
+}
+
+func (bg *Batch) allDependenciesAreIn(context *QueryContext) bool {
+	for key := range bg.Depends {
+		if _, exists := context.Results[key]; !exists {
+			return false
+		}
+	}
+
+	return true
 }
 
 func getBatches(req *Request) (BatchSlice, error) {
@@ -39,15 +48,11 @@ func getBatches(req *Request) (BatchSlice, error) {
 			newBatch := newBatch(query.DataSource.Id, QuerySlice{query})
 			batches = append(batches, newBatch)
 
-			if query.DataSource.Meta {
-				refIds := []string{"A", "B"}
-
-				for _, refId := range refIds {
-					for _, batch := range batches {
-						for _, batchQuery := range batch.Queries {
-							if batchQuery.RefId == refId {
-								newBatch.Depends = append(newBatch.Depends, &batch.Done)
-							}
+			for _, refId := range query.Depends {
+				for _, batch := range batches {
+					for _, batchQuery := range batch.Queries {
+						if batchQuery.RefId == refId {
+							newBatch.Depends[refId] = true
 						}
 					}
 				}
