@@ -1,67 +1,25 @@
 package tsdb
 
-import (
-	"net/http"
-	"net/url"
-	"time"
-)
-
 type Executor interface {
 	Execute(queries QuerySlice, context *QueryContext) *BatchResult
 }
 
+var registry map[string]GetExecutorFn
+
+type GetExecutorFn func(dsInfo *DataSourceInfo) Executor
+
+func init() {
+	registry = make(map[string]GetExecutorFn)
+}
+
 func getExecutorFor(dsInfo *DataSourceInfo) Executor {
-	switch dsInfo.Type {
-	case "graphite":
-		return &GraphiteExecutor{dsInfo}
-	case "test":
-		return unitTestExecutor
+	if fn, exists := registry[dsInfo.Type]; exists {
+		return fn(dsInfo)
 	}
 
 	panic("No executor found for data source type: " + dsInfo.Type)
 }
 
-type UnitTestExecutor struct {
-	results   map[string]*QueryResult
-	resultsFn map[string]executorTestFunc
-}
-
-type executorTestFunc func(context *QueryContext) *QueryResult
-
-var unitTestExecutor = &UnitTestExecutor{
-	results: make(map[string]*QueryResult),
-}
-
-func (e *UnitTestExecutor) Execute(queries QuerySlice, context *QueryContext) *BatchResult {
-	result := &BatchResult{QueryResults: make(map[string]*QueryResult)}
-	for _, query := range queries {
-		if results, has := e.results[query.RefId]; has {
-			result.QueryResults[query.RefId] = results
-		}
-		if testFunc, has := e.resultsFn[query.RefId]; has {
-			result.QueryResults[query.RefId] = testFunc(context)
-		}
-	}
-
-	return result
-}
-
-type GraphiteExecutor struct {
-	*DataSourceInfo
-}
-
-func (e *GraphiteExecutor) Execute(queries QuerySlice, context *QueryContext) *BatchResult {
-	client := http.Client{Timeout: time.Duration(10 * time.Second)}
-
-	params := url.Values{
-		"from":          []string{"now-1h"},
-		"until":         []string{"now"},
-		"maxDataPoints": []string{"500"},
-	}
-
-	client.PostForm("/render?", params)
-
-	return &BatchResult{
-		QueryResults: map[string]*QueryResult{},
-	}
+func RegisterExecutor(dsType string, fn GetExecutorFn) {
+	registry[dsType] = fn
 }

@@ -5,6 +5,7 @@ type Batch struct {
 	Queries      QuerySlice
 	Depends      map[string]bool
 	Done         bool
+	Started      bool
 }
 
 type BatchSlice []*Batch

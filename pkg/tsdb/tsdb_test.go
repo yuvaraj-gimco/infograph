@@ -59,14 +59,15 @@ func TestMetricQuery(t *testing.T) {
 			},
 		}
 
-		setExecutorResults(&QueryResult{RefId: "A", Series: TimeSeriesSlice{&TimeSeries{Name: "Argh"}}})
+		fakeExecutor := registerFakeExecutor()
+		fakeExecutor.Return("A", TimeSeriesSlice{&TimeSeries{Name: "argh"}})
 
 		res, err := HandleRequest(req)
 		So(err, ShouldBeNil)
 
 		Convey("Should return query results", func() {
 			So(res.Results["A"].Series, ShouldNotBeEmpty)
-			So(res.Results["A"].Series[0].Name, ShouldEqual, "Argh")
+			So(res.Results["A"].Series[0].Name, ShouldEqual, "argh")
 		})
 	})
 
@@ -78,10 +79,9 @@ func TestMetricQuery(t *testing.T) {
 			},
 		}
 
-		setExecutorResults(
-			&QueryResult{RefId: "A", Series: TimeSeriesSlice{&TimeSeries{Name: "argh"}}},
-			&QueryResult{RefId: "B", Series: TimeSeriesSlice{&TimeSeries{Name: "barg"}}},
-		)
+		fakeExecutor := registerFakeExecutor()
+		fakeExecutor.Return("A", TimeSeriesSlice{&TimeSeries{Name: "argh"}})
+		fakeExecutor.Return("B", TimeSeriesSlice{&TimeSeries{Name: "barg"}})
 
 		res, err := HandleRequest(req)
 		So(err, ShouldBeNil)
@@ -124,21 +124,20 @@ func TestMetricQuery(t *testing.T) {
 			},
 		}
 
-		unitTestExecutor.results = make(map[string]*QueryResult)
-		unitTestExecutor.resultsFn = make(map[string]executorTestFunc)
-		unitTestExecutor.resultsFn["A"] = func(c *QueryContext) *QueryResult {
+		fakeExecutor := registerFakeExecutor()
+		fakeExecutor.HandleQuery("A", func(c *QueryContext) *QueryResult {
 			time.Sleep(10 * time.Millisecond)
 			return &QueryResult{
 				Series: TimeSeriesSlice{
 					&TimeSeries{Name: "Ares"},
 				}}
-		}
-		unitTestExecutor.resultsFn["B"] = func(c *QueryContext) *QueryResult {
+		})
+		fakeExecutor.HandleQuery("B", func(c *QueryContext) *QueryResult {
 			return &QueryResult{
 				Series: TimeSeriesSlice{
 					&TimeSeries{Name: "Bres+" + c.Results["A"].Series[0].Name},
 				}}
-		}
+		})
 
 		res, err := HandleRequest(req)
 		So(err, ShouldBeNil)
@@ -153,9 +152,11 @@ func TestMetricQuery(t *testing.T) {
 	})
 }
 
-func setExecutorResults(results ...*QueryResult) {
-	unitTestExecutor.results = make(map[string]*QueryResult)
-	for _, res := range results {
-		unitTestExecutor.results[res.RefId] = res
-	}
+func registerFakeExecutor() *FakeExecutor {
+	executor := NewFakeExecutor(nil)
+	RegisterExecutor("test", func(dsInfo *DataSourceInfo) Executor {
+		return executor
+	})
+
+	return executor
 }

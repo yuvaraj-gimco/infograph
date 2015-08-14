@@ -1,12 +1,7 @@
 package tsdb
 
 func HandleRequest(req *Request) (*Response, error) {
-	context := &QueryContext{
-		TimeRange:   req.TimeRange,
-		Queries:     req.Queries,
-		ResultsChan: make(chan *BatchResult),
-		Results:     make(map[string]*QueryResult),
-	}
+	context := NewQueryContext(req.Queries, req.TimeRange)
 
 	batches, err := getBatches(req)
 	if err != nil {
@@ -18,6 +13,7 @@ func HandleRequest(req *Request) (*Response, error) {
 	for _, batch := range batches {
 		if len(batch.Depends) == 0 {
 			currentlyExecuting += 1
+			batch.Started = true
 			go batch.process(context)
 		}
 	}
@@ -36,13 +32,14 @@ func HandleRequest(req *Request) (*Response, error) {
 			}
 
 			for _, batch := range batches {
-				// not interested in completed batches
-				if batch.Done {
+				// not interested in started batches
+				if batch.Started {
 					continue
 				}
 
 				if batch.allDependenciesAreIn(context) {
 					currentlyExecuting += 1
+					batch.Started = true
 					go batch.process(context)
 				}
 			}
