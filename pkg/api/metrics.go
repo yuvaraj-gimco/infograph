@@ -1,10 +1,12 @@
 package api
 
 import (
-	"github.com/grafana/grafana/pkg/api/dtos"
-	"github.com/grafana/grafana/pkg/middleware"
 	"math/rand"
 	"strconv"
+
+	"github.com/grafana/grafana/pkg/api/dtos"
+	"github.com/grafana/grafana/pkg/middleware"
+	"github.com/grafana/grafana/pkg/tsdb"
 )
 
 func GetTestMetrics(c *middleware.Context) {
@@ -33,4 +35,34 @@ func GetTestMetrics(c *middleware.Context) {
 	}
 
 	c.JSON(200, &result)
+}
+
+func GetMetricsRequest(c *middleware.Context, req dtos.MetricRequest) Response {
+	tsdbReq := &tsdb.Request{
+		Queries: make(tsdb.QuerySlice, len(req.Queries)),
+	}
+
+	for _, query := range tsdbReq.Queries {
+		tsdbReq.Queries[0] = &tsdb.Query{
+			RefId:   query.RefId,
+			Query:   query.Query,
+			Depends: query.Depends,
+			DataSource: &tsdb.DataSourceInfo{
+				Id:   1,
+				Url:  "http://localhost:8080",
+				Type: "graphite",
+			},
+		}
+	}
+
+	rsp, err := tsdb.HandleRequest(tsdbReq)
+	if err != nil {
+		return ApiError(500, "Failed to process metric request", err)
+	}
+
+	dto := dtos.MetricResponse{
+		Results: make([]dtos.QueryResult, len(rsp))
+	}
+
+	return nil
 }
