@@ -1,5 +1,7 @@
 package tsdb
 
+import "errors"
+
 type Batch struct {
 	DataSourceId int64
 	Queries      QuerySlice
@@ -20,6 +22,20 @@ func newBatch(dsId int64, queries QuerySlice) *Batch {
 
 func (bg *Batch) process(context *QueryContext) {
 	executor := getExecutorFor(bg.Queries[0].DataSource)
+
+	if executor == nil {
+		bg.Done = true
+		result := &BatchResult{
+			Error:        errors.New("Could not find executor for data source type " + bg.Queries[0].DataSource.Type),
+			QueryResults: make(map[string]*QueryResult),
+		}
+		for _, query := range bg.Queries {
+			result.QueryResults[query.RefId] = &QueryResult{Error: result.Error}
+		}
+		context.ResultsChan <- result
+		return
+	}
+
 	res := executor.Execute(bg.Queries, context)
 	bg.Done = true
 	context.ResultsChan <- res

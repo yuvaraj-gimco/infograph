@@ -7,6 +7,7 @@ import (
 	"github.com/grafana/grafana/pkg/api/dtos"
 	"github.com/grafana/grafana/pkg/middleware"
 	"github.com/grafana/grafana/pkg/tsdb"
+	_ "github.com/grafana/grafana/pkg/tsdb/graphite"
 )
 
 func GetTestMetrics(c *middleware.Context) {
@@ -42,7 +43,7 @@ func GetMetricsRequest(c *middleware.Context, req dtos.MetricRequest) Response {
 		Queries: make(tsdb.QuerySlice, len(req.Queries)),
 	}
 
-	for _, query := range tsdbReq.Queries {
+	for _, query := range req.Queries {
 		tsdbReq.Queries[0] = &tsdb.Query{
 			RefId:   query.RefId,
 			Query:   query.Query,
@@ -60,9 +61,25 @@ func GetMetricsRequest(c *middleware.Context, req dtos.MetricRequest) Response {
 		return ApiError(500, "Failed to process metric request", err)
 	}
 
-	dto := dtos.MetricResponse{
-		Results: make([]dtos.QueryResult, len(rsp))
+	// translate to api dto
+	metricRes := dtos.MetricResponse{Results: make(map[string]*dtos.QueryResult)}
+
+	for refId, res := range rsp.Results {
+		queryRes := &dtos.QueryResult{
+			RefId:  refId,
+			Series: make([]dtos.TimeSeries, len(res.Series)),
+		}
+
+		if res.Error != nil {
+			queryRes.Error = res.Error.Error()
+		}
+
+		for i, series := range res.Series {
+			queryRes.Series[i].Name = series.Name
+			queryRes.Series[i].Points = series.Points
+		}
+		metricRes.Results[refId] = queryRes
 	}
 
-	return nil
+	return Json(200, metricRes)
 }

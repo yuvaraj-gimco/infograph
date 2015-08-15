@@ -114,6 +114,21 @@ func TestMetricQuery(t *testing.T) {
 		})
 	})
 
+	Convey("When query uses data source of unknown type", t, func() {
+		req := &Request{
+			Queries: QuerySlice{
+				{RefId: "A", Query: "asd", DataSource: &DataSourceInfo{Id: 1, Type: "asdasdas"}},
+			},
+		}
+
+		res, err := HandleRequest(req)
+		So(err, ShouldBeNil)
+
+		Convey("Should return error", func() {
+			So(res.Results["A"].Error.Error(), ShouldContainSubstring, "not find")
+		})
+	})
+
 	Convey("When executing request that depend on other query", t, func() {
 		req := &Request{
 			Queries: QuerySlice{

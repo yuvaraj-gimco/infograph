@@ -16,8 +16,7 @@ func getExecutorFor(dsInfo *DataSourceInfo) Executor {
 	if fn, exists := registry[dsInfo.Type]; exists {
 		return fn(dsInfo)
 	}
-
-	panic("No executor found for data source type: " + dsInfo.Type)
+	return nil
 }
 
 func RegisterExecutor(dsType string, fn GetExecutorFn) {

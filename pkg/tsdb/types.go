@@ -33,8 +33,8 @@ type DataSourceInfo struct {
 
 type BatchResult struct {
 	Error        error
-	Timings      *BatchTiming
 	QueryResults map[string]*QueryResult
+	Timings      *BatchTiming
 }
 
 type QueryResult struct {

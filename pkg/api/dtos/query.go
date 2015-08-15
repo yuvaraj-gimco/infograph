@@ -1,11 +1,11 @@
 package dtos
 
 type Query struct {
-	RefId   bool       `json:"refId"`
-	Query   string     `json:"query"`
-	Depends [][]string `json:"depends"`
-	DsId    int64      `json:"dsId"`
-	Exclude bool       `json:"exclude"`
+	RefId   string   `json:"refId"`
+	Query   string   `json:"query"`
+	Depends []string `json:"depends"`
+	DsId    int64    `json:"dsId"`
+	Exclude bool     `json:"exclude"`
 }
 
 type MetricRequest struct {
@@ -13,9 +13,9 @@ type MetricRequest struct {
 }
 
 type QueryResult struct {
-	Error  error      `json:"error"`
-	RefId  string     `json:"refId"`
-	Series TimeSeries `json:"series"`
+	Error  string       `json:"error,omitempty"`
+	RefId  string       `json:"refId"`
+	Series []TimeSeries `json:"series"`
 }
 
 type TimeSeries struct {
@@ -24,5 +24,5 @@ type TimeSeries struct {
 }
 
 type MetricResponse struct {
-	Results []QueryResult `json:"queries"`
+	Results map[string]*QueryResult `json:"results"`
 }

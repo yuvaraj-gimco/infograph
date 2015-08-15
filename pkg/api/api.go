@@ -155,6 +155,8 @@ func Register(r *macaron.Macaron) {
 
 		// metrics
 		r.Get("/metrics/test", GetTestMetrics)
+		r.Post("/metrics/query", bind(dtos.MetricRequest{}), wrap(GetMetricsRequest))
+
 	}, reqSignedIn)
 
 	// admin api
