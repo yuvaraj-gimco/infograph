@@ -2,10 +2,13 @@
   "pluginType": "datasource",
   "name": "Grafana",
   "builtIn": true,
+  "mixed": true,
 
   "type": "grafana",
   "serviceName": "GrafanaDatasource",
 
   "module": "plugins/datasource/grafana/datasource",
-  "metrics": true
+
+  "metrics": true,
+  "supportsMeta": true,
 }

@@ -1,0 +1,13 @@
+{
+  "pluginType": "datasource",
+  "name": "Meta",
+  "builtIn": true,
+  "mixed": false,
+  "meta": true,
+
+  "type": "meta",
+  "serviceName": "MetaDatasource",
+
+  "module": "plugins/datasource/meta/datasource",
+  "metrics": true
+}

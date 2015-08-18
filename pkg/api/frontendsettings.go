@@ -97,6 +97,11 @@ func getFrontendSettingsMap(c *middleware.Context) (map[string]interface{}, erro
 		"meta": plugins.DataSources["mixed"],
 	}
 
+	datasources["-- Meta --"] = map[string]interface{}{
+		"type": "meta",
+		"meta": plugins.DataSources["meta"],
+	}
+
 	if defaultDatasource == "" {
 		defaultDatasource = "-- Grafana --"
 	}
