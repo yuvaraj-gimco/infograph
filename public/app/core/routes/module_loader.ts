@@ -1,4 +1,5 @@
-///<reference path="../../headers/require/require.d.ts" />
+
+declare var require : any;
 
 export class ModuleLoader {
   lazy: any;
@@ -8,7 +9,8 @@ export class ModuleLoader {
     this.lazy = ["$q", "$route", "$rootScope", function($q, $route, $rootScope) {
       var defered = $q.defer();
 
-      require([moduleName], function () {
+      require.ensure([], function () {
+        require('../../features/org/all');
         defered.resolve();
       });
 

@@ -14,8 +14,10 @@ var webpackConfig = {
   },
   output: {
     path: __dirname + '/public_gen/app/',
-    filename: 'bundle.js',
-    publicPath: 'app/'
+    filename: 'bundle.[name].js',
+    chunkFilename: "bundle.chunk.[name].[chunkhash].[id].js",
+    sourceMapFilename: '[file].map',
+    publicPath: 'app/',
   },
   plugins: [
     // This replaces shim stuff in RequireJS.
@@ -27,9 +29,18 @@ var webpackConfig = {
   ],
   module: {
     unknownContextRegExp: /$^/,
+    unknownContextCritical: true,
+
+    exprContextRegExp: /$^/,
+    exprContextCritical: true,
+
+    wrappedContextRegExp: /$^/,
+    wrappedContextCritical: true,
+
     noParse: [
       /\.html/,
       /\.ts/,
+      /\.d\.ts/,
       /\.map/,
       /cloudwatch/,
       /app\/panels/,
@@ -45,6 +56,7 @@ var webpackConfig = {
     ]
   },
   resolve: {
+    extenions: ['', '.js'],
     alias: {
       "kbn":  absDir('/app/components/kbn.js'),
       "extend-jquery":  absDir('/app/components/extend-jquery.js'),

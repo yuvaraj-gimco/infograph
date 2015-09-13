@@ -5,7 +5,6 @@ define([
   'jquery',
   'lodash',
   'angular',
-  'require',
   'config',
   'bootstrap',
   'angular-route',
@@ -16,7 +15,7 @@ define([
   'extend-jquery',
   'bindonce',
 ],
-function ($, _, angular, appLevelRequire) {
+function ($, _, angular) {
 
   "use strict";
 
@@ -97,25 +96,25 @@ function ($, _, angular, appLevelRequire) {
       .element(document)
       .ready(function() {
         angular.bootstrap(document, apps_deps)
-        .invoke(['$rootScope', function ($rootScope) {
+        .invoke([function () {
           _.each(pre_boot_modules, function (module) {
             _.extend(module, register_fns);
           });
 
           pre_boot_modules = false;
-          $rootScope.requireContext = appLevelRequire;
-          $rootScope.require = function (deps, fn) {
-            var $scope = this;
-            $scope.requireContext(deps, function () {
-              var deps = _.toArray(arguments);
-              // Check that this is a valid scope.
-              if($scope.$id) {
-                $scope.$apply(function () {
-                  fn.apply($scope, deps);
-                });
-              }
-            });
-          };
+          // $rootScope.requireContext = appLevelRequire;
+          // $rootScope.require = function (deps, fn) {
+          //   var $scope = this;
+          //   $scope.requireContext(deps, function () {
+          //     var deps = _.toArray(arguments);
+          //     // Check that this is a valid scope.
+          //     if($scope.$id) {
+          //       $scope.$apply(function () {
+          //         fn.apply($scope, deps);
+          //       });
+          //     }
+          //   });
+          // };
         }]);
       });
     });
