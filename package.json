@@ -66,6 +66,8 @@
     "grunt-sync": "^0.4.1",
     "karma-sinon": "^1.0.3",
     "lodash": "^2.4.1",
-    "sinon": "1.10.3"
+    "sinon": "1.10.3",
+    "ts-loader": "^0.5.5",
+    "webpack": "^1.12.1"
   }
 }

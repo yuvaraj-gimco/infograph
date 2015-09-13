@@ -15,6 +15,13 @@ define([
   'angular-ui',
   'extend-jquery',
   'bindonce',
+  './core/core',
+  './services/all',
+  './features/all',
+  './controllers/all',
+  './directives/all',
+  './components/partials',
+  './routes/all',
 ],
 function (angular, $, _, appLevelRequire) {
 
@@ -80,49 +87,42 @@ function (angular, $, _, appLevelRequire) {
   });
 
   var preBootRequires = [
-    'core/core',
-    'services/all',
-    'features/all',
-    'controllers/all',
-    'directives/all',
-    'components/partials',
-    'routes/all',
   ];
 
   app.boot = function() {
-    require(preBootRequires, function () {
+    // disable tool tip animation
+    $.fn.tooltip.defaults.animation = false;
 
-      // disable tool tip animation
-      $.fn.tooltip.defaults.animation = false;
-
-      // bootstrap the app
-      angular
-        .element(document)
-        .ready(function() {
-          angular.bootstrap(document, apps_deps)
-            .invoke(['$rootScope', function ($rootScope) {
-              _.each(pre_boot_modules, function (module) {
-                _.extend(module, register_fns);
-              });
-
-              pre_boot_modules = false;
-              $rootScope.requireContext = appLevelRequire;
-              $rootScope.require = function (deps, fn) {
-                var $scope = this;
-                $scope.requireContext(deps, function () {
-                  var deps = _.toArray(arguments);
-                  // Check that this is a valid scope.
-                  if($scope.$id) {
-                    $scope.$apply(function () {
-                      fn.apply($scope, deps);
-                    });
-                  }
-                });
-              };
-            }]);
+    // bootstrap the app
+    angular
+    .element(document)
+    .ready(function() {
+      angular.bootstrap(document, apps_deps)
+      .invoke(['$rootScope', function ($rootScope) {
+        _.each(pre_boot_modules, function (module) {
+          _.extend(module, register_fns);
         });
+
+        pre_boot_modules = false;
+        $rootScope.requireContext = appLevelRequire;
+        $rootScope.require = function (deps, fn) {
+          var $scope = this;
+          $scope.requireContext(deps, function () {
+            var deps = _.toArray(arguments);
+            // Check that this is a valid scope.
+            if($scope.$id) {
+              $scope.$apply(function () {
+                fn.apply($scope, deps);
+              });
+            }
+          });
+        };
+      }]);
     });
   };
+
+  console.log('booting');
+  app.boot();
 
   return app;
 });

@@ -1,6 +1,6 @@
 define([
   'angular',
-  '../vendor/angular-ui/tabs',
+  './tabs',
 ], function() {
 });
 
