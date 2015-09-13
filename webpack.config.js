@@ -15,13 +15,14 @@ var webpackConfig = {
   output: {
     path: __dirname + '/public_gen/app/',
     filename: 'bundle.js',
+    publicPath: 'app/'
   },
   plugins: [
     // This replaces shim stuff in RequireJS.
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
-      "windows.jQuery": "jquery",
+      "window.jQuery": "jquery",
     })
   ],
   module: {
@@ -37,6 +38,10 @@ var webpackConfig = {
     ],
     // so that JSX can be used.
     loaders: [
+      {
+         test: absDir('/vendor/angular/angular.js'),
+         loader: "exports?angular",
+      },
     ]
   },
   resolve: {
@@ -49,7 +54,7 @@ var webpackConfig = {
       "store": absDir('/app/components/store.js'),
       "app": absDir('/app/app.js'),
       "aws-sdk":  absDir('/vendor/aws-sdk/dist/aws-sdk.js'),
-      "angular": absDir('/vendor/angular/angular.js'),
+      "angular": absDir('/vendor/angular/index.js'),
       "angular-ui": absDir('/vendor/angular-ui/angular-bootstrap.js'),
       "angular-dragdrop": absDir('/vendor/angular-native-dragdrop/draganddrop.js'),
       "angular-sanitize": absDir('/vendor/angular-sanitize/angular-sanitize.js'),
