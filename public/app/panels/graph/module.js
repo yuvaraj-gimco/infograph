@@ -1,20 +1,19 @@
 define([
   'angular',
-  'app',
   'jquery',
   'lodash',
   'kbn',
   'moment',
-  'components/timeSeries',
-  'components/panelmeta',
+  '../../components/timeSeries',
+  '../../components/panelmeta',
   './seriesOverridesCtrl',
   './graph',
   './legend',
 ],
-function (angular, app, $, _, kbn, moment, TimeSeries, PanelMeta) {
+function (angular, $, _, kbn, moment, TimeSeries, PanelMeta) {
   'use strict';
 
-  var module = angular.module('grafana.panels.graph');
+  var module = angular.module('grafana.controllers');
 
   module.directive('grafanaPanelGraph', function() {
     return {

@@ -14,12 +14,38 @@ function (angular, $, config) {
       link: function(scope, elem, attr) {
         var getter = $parse(attr.type), panelType = getter(scope);
         var panelPath = config.panels[panelType].path;
-
-        scope.require([panelPath + "/module"], function () {
+        var doneFn = function() {
           var panelEl = angular.element(document.createElement('grafana-panel-' + panelType));
           elem.append(panelEl);
-          $compile(panelEl)(scope);
-        });
+
+          scope.$apply(function() {
+            $compile(panelEl)(scope);
+          });
+        };
+
+        switch(panelType) {
+          case 'graph':  {
+            require.ensure([], function() {
+              require('../../panels/graph/module');
+              doneFn();
+            });
+            break;
+          }
+          case 'text':  {
+            require.ensure([], function() {
+              require('../../panels/text/module');
+              doneFn();
+            });
+            break;
+          }
+          case 'dashlist':  {
+            require.ensure([], function() {
+              require('../../panels/text/module');
+              doneFn();
+            });
+            break;
+          }
+        }
       }
     };
   });

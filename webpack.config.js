@@ -43,7 +43,7 @@ var webpackConfig = {
       /\.d\.ts/,
       /\.map/,
       /cloudwatch/,
-      /app\/panels/,
+      /app\/panels\/text/,
       /\.json/,
       /moment\.js/
     ],
@@ -81,6 +81,14 @@ var webpackConfig = {
       "spectrum": absDir('/vendor/spectrum.js'),
       "lodash-src": absDir('/vendor/lodash.js'),
       "bindonce": absDir('/vendor/angular-bindonce/bindonce.js'),
+      "jquery.flot": absDir('/vendor/flot/jquery.flot.js'),
+      "jquery.flot.crosshair": absDir('/vendor/flot/jquery.flot.crosshair.js'),
+      "jquery.flot.events": absDir('/vendor/flot/jquery.flot.events.js'),
+      "jquery.flot.fillbelow": absDir('/vendor/flot/jquery.flot.fillbelow.js'),
+      "jquery.flot.selection": absDir('/vendor/flot/jquery.flot.selection.js'),
+      "jquery.flot.stack": absDir('/vendor/flot/jquery.flot.stack.js'),
+      "jquery.flot.stackpercent": absDir('/vendor/flot/jquery.flot.stackpercent.js'),
+      "jquery.flot.time": absDir('/vendor/flot/jquery.flot.time.js'),
     },
     root: [
       __dirname + '/public_gen',
