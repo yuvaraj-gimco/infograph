@@ -26,8 +26,8 @@ function (angular, $, config) {
         switch(panelType) {
           case 'graph':  {
             require.ensure([], function() {
-              require('../../panels/graph/module');
-              doneFn();
+               require('../../panels/graph/module');
+               doneFn();
             });
             break;
           }
