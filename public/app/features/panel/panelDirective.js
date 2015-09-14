@@ -1,9 +1,8 @@
 define([
   'angular',
   'jquery',
-  'config',
 ],
-function (angular, $, config) {
+function (angular, $) {
   'use strict';
 
   var module = angular.module('grafana.directives');
@@ -13,7 +12,6 @@ function (angular, $, config) {
       restrict: 'E',
       link: function(scope, elem, attr) {
         var getter = $parse(attr.type), panelType = getter(scope);
-        var panelPath = config.panels[panelType].path;
         var doneFn = function() {
           var panelEl = angular.element(document.createElement('grafana-panel-' + panelType));
           elem.append(panelEl);
@@ -26,8 +24,8 @@ function (angular, $, config) {
         switch(panelType) {
           case 'graph':  {
             require.ensure([], function() {
-               require('../../panels/graph/module');
-               doneFn();
+              require('../../panels/graph/module');
+              doneFn();
             });
             break;
           }
