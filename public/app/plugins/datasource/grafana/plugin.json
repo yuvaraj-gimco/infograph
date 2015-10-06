@@ -7,8 +7,16 @@
   "type": "grafana",
   "serviceName": "GrafanaDatasource",
 
+<<<<<<< HEAD
   "module": "plugins/datasource/grafana/datasource",
 
   "metrics": true,
   "supportsMeta": true,
+||||||| merged common ancestors
+  "module": "plugins/datasource/grafana/datasource",
+  "metrics": true
+=======
+  "module": "app/plugins/datasource/grafana/datasource",
+  "metrics": true
+>>>>>>> master
 }

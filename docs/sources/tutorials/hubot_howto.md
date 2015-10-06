@@ -7,14 +7,17 @@ author: Torkel Ödegaard
 
 # How to integrate Hubot with Grafana
 
-Grafana 2.0 shipped with a great feature that enables it render any graph or panel to a PNG image.
+Grafana 2.0 shipped with a great feature that enables it to render any graph or panel to a PNG image.
 No matter what data source you are using, the PNG image of the Graph will look the same
 as it does in your browser.
 
 This guide will show you how to install and configure the [Hubot-Grafana](https://github.com/stephenyeargin/hubot-grafana)
 plugin. This plugin allows you to tell hubot to render any dashboard or graph right from a channel in
 Slack, Hipchat or Basecamp. The bot will respond with an image of the graph and a link that will
-take you the graph.
+take you to the graph.
+
+> *Amazon S3 Required*: The hubot-grafana script will upload the rendered graphs to Amazon S3. This
+> is so Hipchat and Slack can show them reliably (they require the image to be publicly available).
 
 <div class="text-center">
   <img src="/img/tutorials/hubot_grafana.png" class="center"></a>
@@ -61,7 +64,7 @@ The `hubot-grafana` plugin requires a number of environment variables to be set 
 The hubot plugin will take advantage of the Grafana server side rendering feature that can
 render any panel on the server using phantomjs. Grafana ships with a phantomjs binary (linux only).
 
-To verify that this freature work try the `Direct link to rendered image` link in the panel share dialog.
+To verify that this freature works try the `Direct link to rendered image` link in the panel share dialog.
 If you do not get an image when opening this link verify that the required font packages are installed for phantomjs to work.
 
 ### Grafana API Key
@@ -72,12 +75,12 @@ You can add these from the API Keys page wich you find in the Organization dropd
 ### Amazon S3
 The `S3` options are optional but for the images to work properly in services like Slack and Hipchat they need
 to publicly available. By specifying the `S3` options the hubot-grafana script will publish the rendered
-panel to `S3` it will use that URL when it posts to Slack or Hipchat.
-
-For everything to work
+panel to `S3` and it will use that URL when it posts to Slack or Hipchat.
 
 ## Hubot commands
 
+- `hubot graf list`
+    - Lists the available dashboards
 - `hubot graf db graphite-carbon-metrics`
     - Graph all panels in the dashboard
 - `hubot graf db graphite-carbon-metrics:3`
@@ -92,12 +95,10 @@ For everything to work
     - Get only the third panel of a particular dashboard with a window of 8 days ago to yesterday
 - `hubot graf db graphite-carbon-metrics host=carbon-a`
     - Get a templated dashboard with the `$host` parameter set to `carbon-a`
-- `hubot graf list`
-    - Lists the available dashboards
 
 ## Aliases
-Some of the hubot commands above can lengthy and you might have to remember dashboard slug (url id).
-If you have a few favorite graphs you want to be able check up on often (lets say from your mobile) you
+Some of the hubot commands above can lengthy and you might have to remember the dashboard slug (url id).
+If you have a few favorite graphs you want to be able check up on often (let's say from your mobile) you
 can create hubot command aliases with the hubot script `hubot-alias`.
 
 Install it:

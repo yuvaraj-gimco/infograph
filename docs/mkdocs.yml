@@ -25,13 +25,16 @@ google_analytics: ['UA-47280256-1', 'grafana.org']
 pages:
 
 # Introduction:
-- ['index.md', 'About', 'Grafana']
+- ['index.md', 'Project', 'About Grafana']
+- ['project/cla.md', 'Project', 'Contributor License Agreement']
+
 - ['installation/index.md', 'Installation', 'Installation']
 - ['installation/debian.md', 'Installation', 'Installing on Debian / Ubuntu']
 - ['installation/rpm.md', 'Installation', 'Installing on RPM-based Linux']
 - ['installation/mac.md', 'Installation', 'Installing on Mac OS X']
 - ['installation/windows.md', 'Installation', 'Installing on Windows']
 - ['installation/docker.md', 'Installation', 'Installing on Docker']
+- ['project/building_from_source.md', 'Installation', 'Building from Source']
 
 - ['installation/configuration.md', 'Installation', 'Configuration']
 - ['installation/ldap.md', 'Installation', 'LDAP Integration']
@@ -49,7 +52,6 @@ pages:
 - ['reference/graph.md', 'Reference', 'Graph Panel']
 - ['reference/singlestat.md', 'Reference', 'Singlestat Panel']
 - ['reference/dashlist.md', 'Reference', 'Dashboard List Panel']
-- ['reference/text.md', 'Reference', 'Text Panel']
 - ['reference/sharing.md', 'Reference', 'Sharing']
 - ['reference/annotations.md', 'Reference', 'Annotations']
 - ['reference/timerange.md', 'Reference', 'Time Range Controls']
@@ -71,8 +73,5 @@ pages:
 - ['tutorials/index.md', 'Tutorials', 'Tutorials']
 # - ['tutorials/stack_guide_graphite.md', 'Tutorials', 'Stack setup: Grafana + Graphite + StatsD']
 - ['tutorials/hubot_howto.md', 'Tutorials', 'How To integrate Hubot and Grafana']
-
-- ['project/building_from_source.md', 'Project', 'Building from Source']
-- ['project/cla.md', 'Project', 'Contributor License Agreement']
 
 - ['jsearch.md', '**HIDDEN**']
