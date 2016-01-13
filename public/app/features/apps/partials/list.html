@@ -8,8 +8,12 @@
   <div class="page-wide" ng-init="ctrl.init()">
     <h2>Apps</h2>
 
-		<div ng-if="!ctrl.apps">
-			<em>No apps defined</em>
+<!--	<div ng-if="!ctrl.apps">-->
+		<div class="filter-list-empty-message">
+			<p>There are no apps available yet, but you could be the first to know.</p>
+			<p style="margin-bottom: 25px;">Grafana.net will be an online marketplace to <strong>discover, share and create</strong> open source apps for Grafana. All in addition to killer features like instance <strong>performance monitoring</strong>, <strong>dashboard backups</strong> and exclusive access to the new <strong>raintank hosted metrics platform</strong>.</p>
+			 <button type="submit" class="btn btn-primary btn-large" ng-click="">
+    		<i class="fa fa-grafana"></i> Get Early Access</button>
 		</div>
 
 		<ul class="filter-list">
