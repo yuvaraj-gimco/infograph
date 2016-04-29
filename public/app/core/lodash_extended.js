@@ -1,10 +1,8 @@
 define([
   'lodash-src'
 ],
-function () {
+function (_) {
   'use strict';
-
-  var _ = window._;
 
   /*
     Mixins :)
