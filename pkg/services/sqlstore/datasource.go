@@ -3,6 +3,7 @@ package sqlstore
 import (
 	"time"
 
+	"github.com/Unknwon/bra/modules/log"
 	"github.com/grafana/grafana/pkg/bus"
 	m "github.com/grafana/grafana/pkg/models"
 
@@ -124,10 +125,12 @@ func UpdateDataSource(cmd *m.UpdateDataSourceCommand) error {
 		sess.UseBool("basic_auth")
 		sess.UseBool("with_credentials")
 
+		log.Info("Updating")
 		_, err := sess.Where("id=? and org_id=?", ds.Id, ds.OrgId).Update(ds)
 		if err != nil {
 			return err
 		}
+		log.Info("Updated")
 
 		err = updateIsDefaultFlag(ds, sess)
 		return err

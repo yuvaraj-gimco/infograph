@@ -53,7 +53,10 @@ type Engine struct {
 
 func (engine *Engine) SetLogger(logger core.ILogger) {
 	engine.Logger = logger
+	engine.ShowDebug = true
 	engine.dialect.SetLogger(logger)
+	logger.Info("Setting Logger")
+	fmt.Println("Setting Logger In XORM")
 }
 
 func (engine *Engine) SetDisableGlobalCache(disable bool) {

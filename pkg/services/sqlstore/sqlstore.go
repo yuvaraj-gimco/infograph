@@ -97,6 +97,7 @@ func SetEngine(engine *xorm.Engine, enableLog bool) (err error) {
 	}
 
 	if enableLog {
+		fmt.Println("AAAAAA")
 		logPath := path.Join(setting.LogsPath, "xorm.log")
 		os.MkdirAll(path.Dir(logPath), os.ModePerm)
 
@@ -104,7 +105,7 @@ func SetEngine(engine *xorm.Engine, enableLog bool) (err error) {
 		if err != nil {
 			return fmt.Errorf("sqlstore.init(fail to create xorm.log): %v", err)
 		}
-		x.Logger = xorm.NewSimpleLogger(f)
+		x.SetLogger(xorm.NewSimpleLogger3(f, "xorm", xorm.DEFAULT_LOG_FLAG, xorm.DEFAULT_LOG_LEVEL))
 	}
 
 	return nil
