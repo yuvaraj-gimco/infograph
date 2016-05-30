@@ -2,6 +2,7 @@
 
 import angular from 'angular';
 import _ from 'lodash';
+import $ from 'jquery';
 
 import config from 'app/core/config';
 import coreModule from 'app/core/core_module';
@@ -237,15 +238,70 @@ function pluginDirectiveLoader($compile, datasourceSrv, $rootScope, $q, $http, $
     appendAndCompile(scope, elem, componentInfo);
   }
 
-  return {
-    restrict: 'E',
-    link: function(scope, elem, attrs) {
+  function isScrolledIntoView(elem) {
+    var $elem = $(elem);
+    var $window = $(window);
+    var docViewTop = $window.scrollTop();
+    var docViewBottom = docViewTop + $window.height();
+    var elemTop = $elem.offset().top;
+    var elemBottom = elemTop + $elem.height();
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+  }
+
+  var lazyPanels = {};
+
+  function buildComponent(scope, elem, attrs, lazy) {
+    if (lazy === false || isScrolledIntoView(elem)) {
+      // remove from lazy panels
+      delete lazyPanels[scope.$id];
+
+      // load plugin
       getModule(scope, attrs).then(function (componentInfo) {
         registerPluginComponent(scope, elem, attrs, componentInfo);
       }).catch(err => {
         $rootScope.appEvent('alert-error', ['Plugin Error', err.message || err]);
         console.log('Plugin component error', err);
       });
+
+    } else if (lazyPanels[scope.$id] === undefined) {
+      // add to lazy panels
+      lazyPanels[scope.$id] = {
+        scope: scope,
+        elem: elem,
+        attrs: attrs,
+      };
+
+      console.log('lazy load:' + scope.panel.id);
+      scope.$on("$destroy", function() {
+        // remove from lazy panels
+        delete lazyPanels[scope.$id];
+        console.log('delete from lazy:' + scope.panel.id);
+      });
+    }
+  }
+
+  $(window).scroll(function() {
+    console.log('checking lazy panels');
+    _.each(lazyPanels, function(panel) {
+      buildComponent(panel.scope, panel.elem, panel.attrs, true);
+    });
+  });
+
+  return {
+    restrict: 'E',
+    link: function(scope, elem, attrs) {
+      var rendered = false;
+
+      // only load panels as they are scrolled into view
+      if (attrs.type === 'panel') {
+        // delay each pane build by a tick to
+        // let them get some dimensions
+        setTimeout(function() {
+          buildComponent(scope, elem, attrs, true);
+        }, 1);
+      } else {
+        buildComponent(scope, elem, attrs, false);
+      }
     }
   };
 }
