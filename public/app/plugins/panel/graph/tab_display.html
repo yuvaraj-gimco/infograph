@@ -133,52 +133,55 @@
 	<div class="edit-tab-content" ng-if="ctrl.subTabIndex === 2">
 		<div class="gf-form-group">
 			<h5>Thresholds</h5>
-			<div class="gf-form-inline" ng-repeat="threshold in ctrl.panel.thresholds">
-				<div class="gf-form">
-					<label class="gf-form-label">T{{$index+1}}</label>
-				</div>
-
-				<div class="gf-form">
-					<div class="gf-form-select-wrapper">
-						<select class="gf-form-input" ng-model="threshold.op" ng-options="f for f in ['>', '<']" ng-change="ctrl.render()"></select>
+			<p>Visual Thresholds are <strong>disabled.</strong><br>To re-enable thresholds, alerting must be turned off. Visit the Alert tab to update your config.</p>
+			<div class="blur">
+				<div class="gf-form-inline" ng-repeat="threshold in ctrl.panel.thresholds">
+					<div class="gf-form">
+						<label class="gf-form-label">T{{$index+1}}</label>
 					</div>
-					<input type="number" ng-model="threshold.value" class="gf-form-input width-8" ng-change="ctrl.render()" placeholder="value">
-				</div>
 
-				<div class="gf-form">
-					<label class="gf-form-label">Color</label>
-					<div class="gf-form-select-wrapper">
-						<select class="gf-form-input" ng-model="threshold.colorMode" ng-options="f for f in ['custom', 'critical', 'warning', 'ok']" ng-change="ctrl.render()"></select>
+					<div class="gf-form">
+						<div class="gf-form-select-wrapper">
+							<select class="gf-form-input" ng-model="threshold.op" ng-options="f for f in ['>', '<']" ng-change="ctrl.render()"></select>
+						</div>
+						<input type="number" ng-model="threshold.value" class="gf-form-input width-8" ng-change="ctrl.render()" placeholder="value">
+					</div>
+
+					<div class="gf-form">
+						<label class="gf-form-label">Color</label>
+						<div class="gf-form-select-wrapper">
+							<select class="gf-form-input" ng-model="threshold.colorMode" ng-options="f for f in ['custom', 'critical', 'warning', 'ok']" ng-change="ctrl.render()"></select>
+						</div>
+					</div>
+
+					<gf-form-switch class="gf-form" label="Fill" checked="threshold.fill" on-change="ctrl.render()"></gf-form-switch>
+					<div class="gf-form" ng-if="threshold.fill && threshold.colorMode === 'custom'">
+						<label class="gf-form-label">Fill color</label>
+						<span class="gf-form-label">
+							<spectrum-picker ng-model="threshold.fillColor" ng-change="ctrl.render()" ></spectrum-picker>
+						</span>
+					</div>
+
+					<gf-form-switch class="gf-form" label="Line" checked="threshold.line" on-change="ctrl.render()"></gf-form-switch>
+					<div class="gf-form" ng-if="threshold.line && threshold.colorMode === 'custom'">
+						<label class="gf-form-label">Line color</label>
+						<span class="gf-form-label">
+							<spectrum-picker ng-model="threshold.lineColor" ng-change="ctrl.render()" ></spectrum-picker>
+						</span>
+					</div>
+
+					<div class="gf-form">
+						<label class="gf-form-label">
+							<i class="fa fa-trash pointer" ng-click="ctrl.removeThreshold($index)"></i>
+						</label>
 					</div>
 				</div>
 
-				<gf-form-switch class="gf-form" label="Fill" checked="threshold.fill" on-change="ctrl.render()"></gf-form-switch>
-				<div class="gf-form" ng-if="threshold.fill && threshold.colorMode === 'custom'">
-					<label class="gf-form-label">Fill color</label>
-					<span class="gf-form-label">
-						<spectrum-picker ng-model="threshold.fillColor" ng-change="ctrl.render()" ></spectrum-picker>
-					</span>
+				<div class="gf-form-button-row">
+					<button class="btn btn-inverse" ng-click="ctrl.addThreshold()">
+						<i class="fa fa-plus"></i>&nbsp;Add Threshold
+					</button>
 				</div>
-
-				<gf-form-switch class="gf-form" label="Line" checked="threshold.line" on-change="ctrl.render()"></gf-form-switch>
-				<div class="gf-form" ng-if="threshold.line && threshold.colorMode === 'custom'">
-					<label class="gf-form-label">Line color</label>
-					<span class="gf-form-label">
-						<spectrum-picker ng-model="threshold.lineColor" ng-change="ctrl.render()" ></spectrum-picker>
-					</span>
-				</div>
-
-				<div class="gf-form">
-					<label class="gf-form-label">
-						<i class="fa fa-trash pointer" ng-click="ctrl.removeThreshold($index)"></i>
-					</label>
-				</div>
-			</div>
-
-			<div class="gf-form-button-row">
-				<button class="btn btn-inverse" ng-click="ctrl.addThreshold()">
-					<i class="fa fa-plus"></i>&nbsp;Add Threshold
-				</button>
 			</div>
 		</div>
 	</div>
