@@ -1,0 +1,12 @@
+baseurl = "http://localhost:3002/"
+languageCode = "en-us"
+title = "Grafana Docs"
+canonifyurls = false
+relativeURLs = false
+verbose = true
+enableRobotsTXT = true
+disableSitemap = false
+disableRSS = true
+contentDir = "docs"
+
+
