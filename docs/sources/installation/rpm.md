@@ -1,18 +1,21 @@
----
-page_title: Installing on RPM-based Linux
-page_description: Grafana Installation guide for Centos, Fedora, OpenSuse, Redhat.
-page_keywords: grafana, installation, centos, fedora, opensuse, redhat, guide
----
++++
+title = "Installing on RPM-based Linux"
+description = "Grafana Installation guide for Centos, Fedora, OpenSuse, Redhat."
+keywords = ["grafana", "installation", "documentation", "centos", "fedora", "opensuse", "redhat"]
+type = "docs"
+[menu.main]
+name = "Installing on Centos / Redhat"
+identifier = "rpm"
+parent = "installation"
++++
 
 # Installing on RPM-based Linux (CentOS, Fedora, OpenSuse, RedHat)
-
-## Download
 
 Description | Download
 ------------ | -------------
 Stable .RPM for CentOS / Fedora / OpenSuse / Redhat Linux | [3.1.1 (x86-64 rpm)](https://grafanarel.s3.amazonaws.com/builds/grafana-3.1.1-1470047149.x86_64.rpm)
 
-## Install Latest Stable
+## Install Stable
 
 You can install Grafana using Yum directly.
 

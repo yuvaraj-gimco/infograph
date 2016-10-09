@@ -1,8 +1,14 @@
----
-page_title: Installing using Docker
-page_description: Grafana Installation guide using Docker container
-page_keywords: grafana, installation, docker, container, guide
----
++++
+title = "Installing using Docker"
+description = "Installing Grafana using Docker guide"
+keywords = ["grafana", "configuration", "documentation", "docker"]
+type = "docs"
+[menu.main]
+name = "Installing using Docker"
+identifier = "config"
+parent = "installation"
++++
+
 
 # Installing using Docker
 

@@ -1,8 +1,13 @@
----
-page_title: Configuration
-page_description: Configuration guide for Grafana.
-page_keywords: grafana, configuration, documentation
----
++++
+title = "Configuration"
+description = "Configuration Docs"
+keywords = ["grafana", "configuration", "documentation"]
+type = "docs"
+[menu.main]
+name = "Configuration"
+identifier = "config"
+parent = "installation"
++++
 
 # Configuration
 

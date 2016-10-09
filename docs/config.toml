@@ -7,6 +7,11 @@ verbose = true
 enableRobotsTXT = true
 disableSitemap = false
 disableRSS = true
-contentDir = "docs"
 
+[menu]
+[[menu.main]]
+name = "Welcome to the Docs"
+identifer = "root"
+url = "/"
+weight = -85
 

@@ -1,7 +1,8 @@
-FROM grafana/docs-base:master
+FROM grafana/docs-base:latest
 
 # to get the git info for this repo
-
 COPY config.toml /site
 
-COPY ./sources /site/docs/
+RUN rm -rf /site/content/*
+
+COPY ./sources /site/content/

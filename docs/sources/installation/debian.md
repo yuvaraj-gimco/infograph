@@ -1,12 +1,15 @@
----
-page_title: Installing on Debian / Ubuntu
-page_description: Grafana Installation guide for Debian / Ubuntu.
-page_keywords: grafana, installation, debian, ubuntu, guide
----
++++
+title = "Installing on Debian / Ubuntu"
+description = "Install guide for Grafana"
+keywords = ["grafana", "installation", "documentation"]
+type = "docs"
+[menu.main]
+name = "Installing on Ubuntu / Debian"
+identifier = "debian"
+parent = "installation"
++++
 
 # Installing on Debian / Ubuntu
-
-## Download
 
 Description | Download
 ------------ | -------------

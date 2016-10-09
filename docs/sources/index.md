@@ -1,8 +1,13 @@
----
-page_title: Grafana Installation
-page_description: Install guide for Grafana
-page_keywords: grafana, installation, documentation
----
++++
+title = "Grafana Installation"
+description = "Install guide for Grafana"
+keywords = ["grafana", "installation", "documentation"]
+type = "docs"
+aliases = ["/"]
+[menu.main]
+name = "Welcome to the Docs"
+identifier = "root"
++++
 
 # Installation
 
