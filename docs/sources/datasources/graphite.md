@@ -1,3 +1,15 @@
++++
+title = "Graphite Data Source Guide"
+description = "Guide for using graphite in Grafana"
+keywords = ["grafana", "graphite", "guide"]
+type = "docs"
+[menu.main]
+name = "Using Graphite in Grafana"
+identifier = "graphite"
+parent = "datasources"
++++
+
+
 ----
 page_title: Graphite query guide
 page_description: Graphite query guide

@@ -1,8 +1,13 @@
-----
-page_title: Graphite query guide
-page_description: Graphite query guide
-page_keywords: grafana, graphite, metrics, query, documentation
----
++++
+title = "Basic Concepts"
+description = "Grafana intro and concept guide"
+keywords = ["grafana", "intro", "guide", "concepts"]
+type = "docs"
+[menu.main]
+name = "Basic Concepts"
+identifier = "basic_concepts"
+parent = "guides"
++++
 
 # Basic Concepts
 
@@ -10,7 +15,7 @@ This document is a “bottom up” introduction to basic concepts in Grafana, an
 
 
 ### ** Data Source **
-Grafana supports many different storage backends for your time series data (Data Source). Each Data Source has a specific Query Editor that is customized for the features and capabilities that the particular Data Source exposes. 
+Grafana supports many different storage backends for your time series data (Data Source). Each Data Source has a specific Query Editor that is customized for the features and capabilities that the particular Data Source exposes.
 
 The following datasources are officially supported: [Graphite](/datasources/graphite/), [InfluxDB](/datasources/influxdb/), [OpenTSDB](/datasources/opentsdb/), [Prometheus](/datasources/prometheus/), [Elasticsearch](/datasources/elasticsearch/), [CloudWatch](/datasources/cloudwatch/), and [KairosDB](/datasources/kairosdb)
 
@@ -21,7 +26,7 @@ Grafana supports multiple organizations in order to support a wide variety of de
 
 In many cases, Grafana will be deployed with a single Organization.
 
-Each Organization can have one or more Data Sources. 
+Each Organization can have one or more Data Sources.
 
 All Dashboards are owned by a particular Organization.
 
@@ -30,9 +35,9 @@ All Dashboards are owned by a particular Organization.
 For more details on the user model for Grafana, please refer to [Admin](/reference/admin/)
 
 ### ** User **
-A User is a named account in Grafana. A user can belong to one or more Organizations, and can be assigned different levels of privileges through roles. 
+A User is a named account in Grafana. A user can belong to one or more Organizations, and can be assigned different levels of privileges through roles.
 
-Grafana supports a wide variety of internal and external ways for Users to authenticate themselves. These include from its own integrated database, from an external SQL server, or from an external LDAP server. 
+Grafana supports a wide variety of internal and external ways for Users to authenticate themselves. These include from its own integrated database, from an external SQL server, or from an external LDAP server.
 
 For more details please refer to [User Auth](/reference/http_api/#users)
 
@@ -42,7 +47,7 @@ A Row is a logical divider within a Dashboard, and is used to group Panels toget
 
 Rows are always 12 “units” wide. These units are automatically scaled dependent on the horizontal resolution of your browser. You can control the relative width of Panels within a row by setting their own width.
 
-We utilize a unit abstraction so that Grafana looks great on all screens both small and huge. 
+We utilize a unit abstraction so that Grafana looks great on all screens both small and huge.
 
  > Note: With MaxDataPoint functionality, Grafana can show you the perfect amount of datapoints no matter your resolution or time-range.
 
@@ -73,7 +78,7 @@ Panels (or an entire Dashboard) can be [Shared](/reference/sharing/) easily in a
 
 ### ** Query Editor **
 
-The Query Editor exposes capabilities of your Data Source and allows you to query the metrics that it contains. 
+The Query Editor exposes capabilities of your Data Source and allows you to query the metrics that it contains.
 
 Use the Query Editor to build one or more queries (for one or more series) in your time series database. The panel will instantly update allowing you to effectively explore your data in real time and build a perfect query for that particular Panel.
 
@@ -87,7 +92,7 @@ The Dashboard is where it all comes together. Dashboards can be thought of as of
 
 The time period for the Dashboard can be controlled by the [Dashboard time picker](/reference/timerange/) in the upper right of the Dashboard.
 
-Dashboards can utilize [Templating](/reference/templating/) to make them more dynamic and interactive. 
+Dashboards can utilize [Templating](/reference/templating/) to make them more dynamic and interactive.
 
 Dashboards can utilize [Annotations](/reference/annotations/) to display event data across Panels. This can help correlate the time series data in the Panel with other events.
 

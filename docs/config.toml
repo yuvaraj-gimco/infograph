@@ -9,9 +9,4 @@ disableSitemap = false
 disableRSS = true
 
 [menu]
-[[menu.main]]
-name = "Welcome to the Docs"
-identifer = "root"
-url = "/"
-weight = -85
 

@@ -2,14 +2,15 @@
 title = "Grafana Installation"
 description = "Install guide for Grafana"
 keywords = ["grafana", "installation", "documentation"]
-type = "docs"
+type = "docs_root"
 aliases = ["/"]
 [menu.main]
 name = "Welcome to the Docs"
 identifier = "root"
+weight = -1
 +++
 
-# Installation
+# Welcome to the Grafana Documentation
 
 Grafana is easily installed via a Debian/Ubuntu package (.deb), via
 Redhat/Centos package (.rpm) or manually via a tarball that contains all

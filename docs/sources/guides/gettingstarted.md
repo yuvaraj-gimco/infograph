@@ -1,8 +1,14 @@
----
-page_title: Getting started
-page_description: Getting started
-page_keywords: grafana, guide, documentation
----
++++
+title = "Getting Started"
+description = "Getting started with Grafana guide"
+keywords = ["grafana", "intro", "guide", "started"]
+type = "docs"
+[menu.main]
+name = "Getting Started"
+identifier = "getting_started"
+parent = "guides"
++++
+
 
 # Getting started
 This guide will help you get started and acquainted with Grafana. It assumes you have a working Grafana server up and running and have added at least one [Data Source](/datasources/overview).

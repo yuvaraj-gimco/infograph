@@ -6,3 +6,5 @@ COPY config.toml /site
 RUN rm -rf /site/content/*
 
 COPY ./sources /site/content/
+
+COPY awsconfig /site
