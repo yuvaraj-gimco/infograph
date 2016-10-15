@@ -3,7 +3,7 @@ title = "Getting Started"
 description = "Getting started with Grafana guide"
 keywords = ["grafana", "intro", "guide", "started"]
 type = "docs"
-[menu.main]
+[menu.docs]
 name = "Getting Started"
 identifier = "getting_started"
 parent = "guides"

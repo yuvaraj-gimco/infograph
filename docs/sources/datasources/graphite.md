@@ -3,7 +3,7 @@ title = "Graphite Data Source Guide"
 description = "Guide for using graphite in Grafana"
 keywords = ["grafana", "graphite", "guide"]
 type = "docs"
-[menu.main]
+[menu.docs]
 name = "Using Graphite in Grafana"
 identifier = "graphite"
 parent = "datasources"

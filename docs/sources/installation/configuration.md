@@ -3,7 +3,7 @@ title = "Configuration"
 description = "Configuration Docs"
 keywords = ["grafana", "configuration", "documentation"]
 type = "docs"
-[menu.main]
+[menu.docs]
 name = "Configuration"
 identifier = "config"
 parent = "installation"

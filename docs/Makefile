@@ -25,7 +25,7 @@ docs: docs-build
 	$(DOCKER_RUN_DOCS) -p 3004:3004 -p 3005:3005 -e DOCKERHOST "$(DOCKER_DOCS_IMAGE)" /bin/bash -c "grunt && grunt connect --port=3004"
 
 publish: docs-build
-	$(DOCKER_RUN_DOCS) -p 3004:3004 -p 3005:3005 -e DOCKERHOST "$(DOCKER_DOCS_IMAGE)" /bin/bash -c "./publish.sh"
+	$(DOCKER_RUN_DOCS) "$(DOCKER_DOCS_IMAGE)" /bin/bash -c "./publish.sh staging-docs"
 
 docs-draft: docs-build
 	$(DOCKER_RUN_DOCS) -p $(if $(DOCSPORT),$(DOCSPORT):)8000 -e DOCKERHOST "$(DOCKER_DOCS_IMAGE)" hugo server --buildDrafts="true" --port=$(DOCSPORT) --baseUrl=$(HUGO_BASE_URL) --bind=$(HUGO_BIND_IP)

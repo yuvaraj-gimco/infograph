@@ -3,7 +3,7 @@ title = "Installing on RPM-based Linux"
 description = "Grafana Installation guide for Centos, Fedora, OpenSuse, Redhat."
 keywords = ["grafana", "installation", "documentation", "centos", "fedora", "opensuse", "redhat"]
 type = "docs"
-[menu.main]
+[menu.docs]
 name = "Installing on Centos / Redhat"
 identifier = "rpm"
 parent = "installation"

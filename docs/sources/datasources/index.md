@@ -1,7 +1,7 @@
 +++
 title = "Data Sources"
 type = "docs"
-[menu.main]
+[menu.docs]
 name = "Data Sources"
 identifier = "datasources"
 weight = 3

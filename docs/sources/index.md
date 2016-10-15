@@ -4,7 +4,7 @@ description = "Install guide for Grafana"
 keywords = ["grafana", "installation", "documentation"]
 type = "docs_root"
 aliases = ["/"]
-[menu.main]
+[menu.docs]
 name = "Welcome to the Docs"
 identifier = "root"
 weight = -1

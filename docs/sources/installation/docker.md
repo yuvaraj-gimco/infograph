@@ -3,7 +3,7 @@ title = "Installing using Docker"
 description = "Installing Grafana using Docker guide"
 keywords = ["grafana", "configuration", "documentation", "docker"]
 type = "docs"
-[menu.main]
+[menu.docs]
 name = "Installing using Docker"
 identifier = "installation"
 parent = "installation"

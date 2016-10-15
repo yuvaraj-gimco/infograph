@@ -3,7 +3,7 @@ title = "Basic Concepts"
 description = "Grafana intro and concept guide"
 keywords = ["grafana", "intro", "guide", "concepts"]
 type = "docs"
-[menu.main]
+[menu.docs]
 name = "Basic Concepts"
 identifier = "basic_concepts"
 parent = "guides"
