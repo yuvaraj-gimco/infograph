@@ -15,7 +15,7 @@ GIT_BRANCH_CLEAN := $(shell echo $(GIT_BRANCH) | sed -e "s/[^[:alnum:]]/-/g")
 DOCKER_DOCS_IMAGE := grafana/grafana-docs
 
 DOCKER_RUN_DOCS := docker run --rm -it $(DOCS_MOUNT) -e AWS_S3_BUCKET -e NOCACHE
-SOURCES_HOST_DIR := $(shell realpath "./sources")
+SOURCES_HOST_DIR := "$(shell pwd)/sources"
 
 # for some docs workarounds (see below in "docs-build" target)
 GITCOMMIT := $(shell git rev-parse --short HEAD 2>/dev/null)
