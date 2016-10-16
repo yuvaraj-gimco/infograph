@@ -7,6 +7,7 @@ type = "docs"
 name = "Installing on Centos / Redhat"
 identifier = "rpm"
 parent = "installation"
+weight = 2
 +++
 
 # Installing on RPM-based Linux (CentOS, Fedora, OpenSuse, RedHat)

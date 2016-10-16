@@ -9,3 +9,4 @@ COPY ./sources /site/content/
 
 COPY awsconfig /site
 
+VOLUME ["/site/content"]

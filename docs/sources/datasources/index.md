@@ -4,7 +4,7 @@ type = "docs"
 [menu.docs]
 name = "Data Sources"
 identifier = "datasources"
-weight = 3
+weight = 4
 +++
 
 

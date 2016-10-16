@@ -1,9 +1,9 @@
 +++
-title = "Guides"
-description = "Grafana guides"
+title = "Beginner Guides"
+description = "Beginner guides"
 type = "docs"
 [menu.docs]
-name = "Guides"
+name = "Beginner Guides"
 identifier = "guides"
 weight = 2
 +++

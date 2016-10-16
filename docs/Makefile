@@ -15,6 +15,7 @@ GIT_BRANCH_CLEAN := $(shell echo $(GIT_BRANCH) | sed -e "s/[^[:alnum:]]/-/g")
 DOCKER_DOCS_IMAGE := grafana/grafana-docs
 
 DOCKER_RUN_DOCS := docker run --rm -it $(DOCS_MOUNT) -e AWS_S3_BUCKET -e NOCACHE
+SOURCES_HOST_DIR := $(shell realpath "./sources")
 
 # for some docs workarounds (see below in "docs-build" target)
 GITCOMMIT := $(shell git rev-parse --short HEAD 2>/dev/null)
@@ -23,6 +24,9 @@ default: docs
 
 docs: docs-build
 	$(DOCKER_RUN_DOCS) -p 3004:3004 -p 3005:3005 -e DOCKERHOST "$(DOCKER_DOCS_IMAGE)" /bin/bash -c "grunt && grunt connect --port=3004"
+
+docs-watch: docs-build
+	$(DOCKER_RUN_DOCS) -p 3004:3004 -p 3005:3005 -v $(SOURCES_HOST_DIR):/site/content -e DOCKERHOST "$(DOCKER_DOCS_IMAGE)" /bin/bash -c "grunt --env=dev-docs && grunt connect --port=3004 & grunt watch --port=3004 --env=dev-docs"
 
 publish: docs-build
 	$(DOCKER_RUN_DOCS) "$(DOCKER_DOCS_IMAGE)" /bin/bash -c "./publish.sh staging-docs"

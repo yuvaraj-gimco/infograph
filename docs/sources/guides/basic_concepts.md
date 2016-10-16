@@ -13,15 +13,14 @@ parent = "guides"
 
 This document is a “bottom up” introduction to basic concepts in Grafana, and can be used as a starting point to get familiar with core features.
 
-
-### ** Data Source **
+### Data Source
 Grafana supports many different storage backends for your time series data (Data Source). Each Data Source has a specific Query Editor that is customized for the features and capabilities that the particular Data Source exposes.
 
 The following datasources are officially supported: [Graphite](/datasources/graphite/), [InfluxDB](/datasources/influxdb/), [OpenTSDB](/datasources/opentsdb/), [Prometheus](/datasources/prometheus/), [Elasticsearch](/datasources/elasticsearch/), [CloudWatch](/datasources/cloudwatch/), and [KairosDB](/datasources/kairosdb)
 
 The query language and capabilities of each Data Source are obviously very different. You can combine data from multiple Data Sources onto a single Dashboard, but each Panel is tied to a specific Data Source that belongs to a particular Organization.
 
-### ** Organization **
+### Organization
 Grafana supports multiple organizations in order to support a wide variety of deployment models, including using a single Grafana instance to provide service to multiple potentially untrusted Organizations.
 
 In many cases, Grafana will be deployed with a single Organization.
@@ -34,14 +33,14 @@ All Dashboards are owned by a particular Organization.
 
 For more details on the user model for Grafana, please refer to [Admin](/reference/admin/)
 
-### ** User **
+### User
 A User is a named account in Grafana. A user can belong to one or more Organizations, and can be assigned different levels of privileges through roles.
 
 Grafana supports a wide variety of internal and external ways for Users to authenticate themselves. These include from its own integrated database, from an external SQL server, or from an external LDAP server.
 
 For more details please refer to [User Auth](/reference/http_api/#users)
 
-### ** Row **
+### Row
 
 A Row is a logical divider within a Dashboard, and is used to group Panels together.
 
@@ -55,7 +54,7 @@ Utilize the [Repeating Row functionality](/reference/templating/#utilizing-templ
 
 Rows can be collapsed by clicking on the Row Title. If you save a Dashboard with a Row collapsed, it will save in that state and will not preload those graphs until the row is expanded.
 
-### ** Panel **
+### Panel
 
 The Panel is the basic visualization building block in Grafana. Each Panel provides a Query Editor (dependent on the Data Source selected in the panel) that allows you to extract the perfect visualization to display on the Panel by utilizing the Query Editor
 
@@ -76,7 +75,7 @@ The time range on Panels is normally what is set in the [Dashboard time picker](
 Panels (or an entire Dashboard) can be [Shared](/reference/sharing/) easily in a variety of ways. You can send a link to someone who has a login to your Grafana. You can use the [Snapshot](/reference/sharing/#snapshots) feature to encode all the data currently being viewed into a static and interactive JSON document; it's so much better than emailing a screenshot!
 
 
-### ** Query Editor **
+### Query Editor
 
 The Query Editor exposes capabilities of your Data Source and allows you to query the metrics that it contains.
 
@@ -86,7 +85,7 @@ You can utilize [Template variables](/reference/templating/) in the Query Editor
 
 Grafana allows you to reference queries in the Query Editor by the row that they’re on. If you add a second query to graph, you can reference the first query simply by typing in #A. This provides an easy and convenient way to build compounded queries.
 
-### ** Dashboard **
+### Dashboard
 
 The Dashboard is where it all comes together. Dashboards can be thought of as of a set of one or more Panels organized and arranged into one or more Rows.
 

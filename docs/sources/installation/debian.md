@@ -7,6 +7,7 @@ type = "docs"
 name = "Installing on Ubuntu / Debian"
 identifier = "debian"
 parent = "installation"
+weight = 1
 +++
 
 # Installing on Debian / Ubuntu

@@ -1,8 +1,12 @@
----
-page_title: Plugin datasources
-page_description: Datasource plugins for Grafana
-page_keywords: grafana, plugins, documentation
----
++++
+title = "Datasource Plugins"
+type = "docs"
+[menu.docs]
+name = "Datasource Plugins"
+identifier = "datasource_plugins"
+parent = "plugins"
+weight = 1
++++
 
 
 # Datasources

@@ -1,5 +1,5 @@
 +++
-title = "Graphite Data Source Guide"
+title = "Using Graphite in Grafana"
 description = "Guide for using graphite in Grafana"
 keywords = ["grafana", "graphite", "guide"]
 type = "docs"
@@ -10,13 +10,7 @@ parent = "datasources"
 +++
 
 
-----
-page_title: Graphite query guide
-page_description: Graphite query guide
-page_keywords: grafana, graphite, metrics, query, documentation
----
-
-# Graphite
+# Using Graphite in Grafana
 
 Grafana has an advanced Graphite query editor that lets you quickly navigate the metric space, add functions,
 change function parameters and much more. The editor can handle all types of graphite queries. It can even handle complex nested

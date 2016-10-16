@@ -7,6 +7,7 @@ type = "docs"
 name = "Configuration"
 identifier = "config"
 parent = "installation"
+weight = 3
 +++
 
 # Configuration
