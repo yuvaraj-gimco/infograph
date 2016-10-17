@@ -3,7 +3,7 @@ title = "Plugins"
 [menu.docs]
 name = "Plugins"
 identifier = "plugins"
-weight = 5
+weight = 8
 +++
 
 
