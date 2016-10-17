@@ -6,7 +6,7 @@ type = "docs"
 [menu.docs]
 name = "Basic Concepts"
 identifier = "basic_concepts"
-parent = "guides"
+parent = "getting_started"
 +++
 
 # Basic Concepts

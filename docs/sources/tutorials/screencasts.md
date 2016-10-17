@@ -3,8 +3,8 @@ title = "Screencasts"
 type = "docs"
 [menu.docs]
 identifier = "screencasts"
-parent = "tutorials"
-weight = 1
+parent = "features"
+weight = 10
 +++
 
 # Screencasts

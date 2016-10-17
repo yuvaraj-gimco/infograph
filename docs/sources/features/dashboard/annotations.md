@@ -4,7 +4,7 @@ keywords = ["grafana", "annotations", "documentation", "guide"]
 type = "docs"
 [menu.docs]
 name = "Annotations"
-parent = "features"
+parent = "dashboard_features"
 weight = 2
 +++
 

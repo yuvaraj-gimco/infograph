@@ -4,7 +4,7 @@ keywords = ["grafana", "graph panel", "documentation", "guide", "graph"]
 type = "docs"
 [menu.docs]
 name = "Graph Panel"
-parent = "features"
+parent = "panels"
 weight = 1
 +++
 

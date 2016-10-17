@@ -5,8 +5,9 @@ keywords = ["grafana", "configuration", "documentation", "docker"]
 type = "docs"
 [menu.docs]
 name = "Installing using Docker"
-identifier = "installation"
+identifier = "docker"
 parent = "installation"
+weight = 4
 +++
 
 # Installing using Docker

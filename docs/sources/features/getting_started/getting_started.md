@@ -5,8 +5,8 @@ keywords = ["grafana", "intro", "guide", "started"]
 type = "docs"
 [menu.docs]
 name = "Getting Started"
-identifier = "getting_started"
-parent = "guides"
+identifier = "getting_started_guide"
+parent = "getting_started"
 +++
 
 # Getting started
