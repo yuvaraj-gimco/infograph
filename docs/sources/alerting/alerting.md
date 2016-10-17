@@ -1,8 +1,14 @@
----
-page_title: Alerting
-page_description: Alerting for Grafana
-page_keywords: alerting, grafana, plugins, documentation
----
++++
+title = "Alerting"
+description = "Alerting"
+keywords = ["grafana", "alerting", "guide"]
+type = "docs"
+[menu.docs]
+name = "Alerting"
+identifier = "alerting"
+parent = "features"
+weight = 6
++++
 
 # Alerting
 

@@ -1,8 +1,15 @@
----
-page_title: LDAP Integration
-page_description: LDAP Integration guide for Grafana.
-page_keywords: grafana, ldap, configuration, documentation, integration
----
++++
+title = "Authentication LDAP"
+description = "Grafana LDAP Authentication Guide "
+keywords = ["grafana", "configuration", "documentation", "ldap"]
+type = "docs"
+aliases = ["/installation/ldap"]
+[menu.docs]
+name = "Authentication LDAP"
+identifier = "ldap"
+parent = "admin"
+weight = 3
++++
 
 # LDAP Integration
 

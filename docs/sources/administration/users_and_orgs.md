@@ -1,8 +1,15 @@
-----
-page_title: Administration
-page_description: Grafana Administration
-page_keywords: grafana, admin, administration, documentation
----
++++
+title = "Users & Orgs"
+description = "Users & Organization permission and administration"
+keywords = ["grafana", "configuration", "documentation", "admin", "users", "permissions"]
+type = "docs"
+aliases = ["/installation/ldap"]
+[menu.docs]
+name = "Users & Orgs"
+identifier = "users_orgs"
+parent = "admin"
+weight = 3
++++
 
 # Administration
 
@@ -32,6 +39,6 @@ From the Grafana Server Admin page, you can access the System Info page which su
 
 Organizations in Grafana are best suited for a **multi-tenant deployment**. In a multi-tenant deployment,
 Organizations can be used to provide a full Grafana experience to different sets of users from a single Grafana instance,
-at the convenience of the Grafana Administrator. 
+at the convenience of the Grafana Administrator.
 
-In most cases, a Grafana installation will only have **one** Organization. Since dashboards, data sources and other configuration items are not shared between organizations, there's no need to create multiple Organizations if you want all your users to have access to the same set of dashboards and data. 
+In most cases, a Grafana installation will only have **one** Organization. Since dashboards, data sources and other configuration items are not shared between organizations, there's no need to create multiple Organizations if you want all your users to have access to the same set of dashboards and data.

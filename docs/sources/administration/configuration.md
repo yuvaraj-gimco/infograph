@@ -8,7 +8,7 @@ aliases = ["/installation/configuration"]
 name = "Configuration"
 identifier = "config"
 parent = "admin"
-weight = 3
+weight = 1
 +++
 
 # Configuration
