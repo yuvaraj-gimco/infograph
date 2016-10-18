@@ -1,12 +1,10 @@
 +++
-title = "Users & Orgs"
+title = "Admin Roles"
 description = "Users & Organization permission and administration"
 keywords = ["grafana", "configuration", "documentation", "admin", "users", "permissions"]
 type = "docs"
-aliases = ["/installation/ldap"]
 [menu.docs]
-name = "Users & Orgs"
-identifier = "users_orgs"
+name = "Admin Roles"
 parent = "admin"
 weight = 3
 +++

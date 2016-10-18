@@ -3,9 +3,9 @@ title = "Beginner Guides"
 description = "Beginner guides"
 type = "docs"
 [menu.docs]
-name = "Features & Guides"
+name = "Features"
 identifier = "features"
-weight = 2
+weight = 3
 +++
 
 

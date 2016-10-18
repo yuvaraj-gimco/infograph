@@ -3,7 +3,6 @@ title = "Configuration"
 description = "Configuration Docs"
 keywords = ["grafana", "configuration", "documentation"]
 type = "docs"
-aliases = ["/installation/configuration"]
 [menu.docs]
 name = "Configuration"
 identifier = "config"

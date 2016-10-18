@@ -3,12 +3,11 @@ title = "Authentication LDAP"
 description = "Grafana LDAP Authentication Guide "
 keywords = ["grafana", "configuration", "documentation", "ldap"]
 type = "docs"
-aliases = ["/installation/ldap"]
 [menu.docs]
 name = "Authentication LDAP"
 identifier = "ldap"
 parent = "admin"
-weight = 3
+weight = 2
 +++
 
 # LDAP Integration
