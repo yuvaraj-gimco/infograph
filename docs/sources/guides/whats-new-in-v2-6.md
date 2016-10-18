@@ -110,7 +110,7 @@ You can remove the group by by clicking on the `tag` and then click on the x ico
 The new editor also allows you to remove group by time and select `raw` table data. Which is very useful
 in combination with the new Table panel to show raw log data stored in InfluxDB.
 
-<img src="/assets/img/blog/v2.6/table_influxdb_logs.png">
+<img src="/img/docs/blog/v2.6/table_influxdb_logs.png">
 
 ## Pipeline metrics
 
