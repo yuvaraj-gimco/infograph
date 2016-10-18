@@ -3,11 +3,10 @@ title = "Graph Panel"
 keywords = ["grafana", "graph panel", "documentation", "guide", "graph"]
 type = "docs"
 [menu.docs]
-name = "Graph Panel"
+name = "Graph"
 parent = "panels"
 weight = 1
 +++
-
 
 # Graph Panel
 

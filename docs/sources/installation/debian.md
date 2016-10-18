@@ -101,23 +101,24 @@ By default Grafana will log to `/var/log/grafana`
 
 The default configuration specifies a sqlite3 database located at
 `/var/lib/grafana/grafana.db`. Please backup this database before
-upgrades. You can also use MySQL or Postgres as the Grafana database, as detailed on [the configuration page](configuration.md#database).
+upgrades. You can also use MySQL or Postgres as the Grafana database, as detailed on [the configuration page]({{< relref "configuration.md#database" >}}).
 
 ## Configuration
 
 The configuration file is located at `/etc/grafana/grafana.ini`.  Go the
-[Configuration](/installation/configuration) page for details on all
+[Configuration]({{< relref "configuration.md" >}}) page for details on all
 those options.
 
 ### Adding data sources
 
-- [Graphite](../datasources/graphite.md)
-- [InfluxDB](../datasources/influxdb.md)
-- [OpenTSDB](../datasources/opentsdb.md)
+- [Graphite]({{< relref "datasources/graphite.md" >}})
+- [InfluxDB]({{< relref "datasources/influxdb.md" >}})
+- [OpenTSDB]({{< relref "datasources/opentsdb.md" >}})
+- [Prometheus]({{< relref "datasources/prometheus.md" >}})
 
 ## Installing from binary tar file
 
-Download [the latest `.tar.gz` file](http://grafana.org/download/builds) and
+Download [the latest `.tar.gz` file](http://grafana.org/download) and
 extract it.  This will extract into a folder named after the version you
 downloaded. This folder contains all files required to run Grafana.  There are
 no init scripts or install scripts in this package.

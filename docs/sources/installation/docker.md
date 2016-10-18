@@ -37,6 +37,6 @@ an `ENV` instruction.
 ## Configuration
 
 The back-end web server has a number of configuration options. Go the
-[Configuration](../installation/configuration.md) page for details on all
+[Configuration]({{< relref "configuration.md" >}}) page for details on all
 those options.
 
