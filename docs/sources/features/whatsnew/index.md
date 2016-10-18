@@ -1,9 +1,8 @@
 +++
 title = "What's New in Grafana"
 [menu.docs]
-name = "What's New"
+name = "What's New In Grafana"
 identifier = "whatsnew"
-parent = "features"
 weight = 2
 +++
 
