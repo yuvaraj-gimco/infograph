@@ -2,7 +2,6 @@
 title = "Templating"
 keywords = ["grafana", "templating", "documentation", "guide"]
 type = "docs"
-aliases = ["/reference/templating/"]
 [menu.docs]
 name = "Templating"
 parent = "dashboard_features"
