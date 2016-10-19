@@ -5,7 +5,7 @@ type = "docs"
 [menu.docs]
 name = "JSON Model"
 parent = "dashboard_features"
-weight = 9
+weight = 100
 +++
 
 # Dashboard JSON

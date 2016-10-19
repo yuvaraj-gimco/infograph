@@ -1,13 +1,3 @@
-+++
-title = "Datasource Plugins"
-type = "docs"
-[menu.docs]
-name = "Datasource Plugins"
-identifier = "datasource_plugins"
-parent = "plugins"
-weight = 1
-+++
-
 
 # Datasources
 
