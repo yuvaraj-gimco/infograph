@@ -6,8 +6,13 @@ import $ from 'jquery';
 import coreModule from '../../core_module';
 
 export class NavbarCtrl {
+
   /** @ngInject */
-  constructor(private $scope, private contextSrv) {
+  constructor(private $rootScope, private contextSrv) {
+  }
+
+  showSearch() {
+    this.$rootScope.appEvent('show-dash-search');
   }
 }
 

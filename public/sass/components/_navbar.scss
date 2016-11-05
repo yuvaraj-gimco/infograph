@@ -138,6 +138,47 @@
   }
 }
 
+.navbar-dash-btn {
+  position: relative;
+  cursor: pointer;
+  overflow: visible;
+
+  &--open {
+    .slide-menu {
+      transform: translate(0, 11px);
+    }
+  }
+}
+
+.slide-menu {
+  font-size: $font-size-sm;
+  position: absolute;
+  transform: translate(0, -250px);
+  transition: 0.2s ease-out 0.0s;
+  z-index: 99;
+  background: $side-menu-bg;
+  list-style: none;
+
+  li a {
+    display: block;
+    white-space: nowrap;
+    color: $text-muted;
+    font-size: $font-size-sm;
+    padding: $spacer/2 $spacer;
+    border-left: 2px solid $side-menu-bg;
+    i {
+      display: inline-block;
+      padding-right: $spacer/2;
+    }
+
+    &:hover {
+      @include left-brand-border-gradient();
+      color: $link-color;
+      background: $input-label-bg;
+    }
+  }
+}
+
 .sidemenu-pinned {
   .navbar-brand-btn {
     background-color: $page-bg;
@@ -159,4 +200,5 @@
     }
   }
 }
+
 
