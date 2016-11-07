@@ -12,7 +12,7 @@
 <!-- 	</span> -->
 <!-- </a> -->
 
-<ul class="nav pull-left dashnav-action-icons hide">
+<ul class="nav pull-left dashnav-action-icons">
   <li ng-show="::dashboardMeta.canStar">
     <a class="pointer" ng-click="starDashboard()">
       <i class="fa" ng-class="{'fa-star-o': !dashboardMeta.isStarred, 'fa-star': dashboardMeta.isStarred}" style="color: orange;"></i>
@@ -46,23 +46,6 @@
   </li>
   <li ng-if="dashboard.snapshot.originalUrl">
     <a ng-href="{{dashboard.snapshot.originalUrl}}" bs-tooltip="'Open original dashboard'" data-placement="bottom"><i class="fa fa-link"></i></a>
-  </li>
-  <li ng-if="::showSettingsMenu" class="dropdown">
-    <a class="pointer" ng-click="hideTooltip($event)" bs-tooltip="'Manage dashboard'" data-placement="bottom" data-toggle="dropdown"><i class="fa fa-cog"></i></a>
-    <ul class="dropdown-menu">
-      <li ng-if="dashboardMeta.canEdit"><a class="pointer" ng-click="openEditView('settings');">Settings</a></li>
-      <li ng-if="dashboardMeta.canEdit"><a class="pointer" ng-click="openEditView('annotations');">Annotations</a></li>
-      <li ng-if="dashboardMeta.canEdit"><a class="pointer" ng-click="openEditView('templating');">Templating</a></li>
-      <li ng-if="dashboardMeta.canEdit"><a class="pointer" ng-click="viewJson();">View JSON</a></li>
-      <li ng-if="contextSrv.isEditor && !dashboard.editable"><a class="pointer" ng-click="makeEditable();">Make Editable</a></li>
-      <li ng-if="contextSrv.isEditor"><a class="pointer" ng-click="saveDashboardAs();">Save As...</a></li>
-      <li class="dropdown-menu-item-with-shortcut">
-        <a class="pointer" ng-click="showHelpModal();">
-          Help <span class="dropdown-menu-item-shortcut">h</span>
-        </a>
-      </li>
-      <li ng-if="dashboardMeta.canSave"><a class="pointer" ng-click="deleteDashboard();">Delete dashboard</a></li>
-    </ul>
   </li>
 </ul>
 

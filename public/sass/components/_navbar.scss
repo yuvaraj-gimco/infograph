@@ -64,6 +64,10 @@
   border-right: 1px solid $tight-form-border;
   background-color: $navbarButtonBackground;
   padding: 0.4rem 1.0rem 0.4rem 1rem;
+  margin: 0 4px 0 0;
+  box-shadow: 1px 1px 5px #040404;
+  background-image: linear-gradient(to bottom, #1f1f1f, #333333);
+  background-repeat: repeat-x;
 
   .fa-caret-down {
     font-size: 70%;
@@ -113,7 +117,11 @@
   color: darken($link-color, 5%);
   background-color: $navbarButtonBackground;
   font-size: $font-size-lg;
-  padding: 1rem 1rem 0.7rem 1rem;
+  padding: 1rem 1rem 0.75rem 1rem;
+  margin: 0 4px 0 0;
+  box-shadow: 1px 1px 5px #040404;
+  background-image: linear-gradient(to bottom, #1f1f1f, #333333);
+  background-repeat: repeat-x;
 
   &:hover {
     background: $navbarButtonBackgroundHighlight;
