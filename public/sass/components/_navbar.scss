@@ -77,7 +77,7 @@
   }
 
   &:hover {
-    background: $navbarButtonBackgroundHighlight;
+    background: $side-menu-bg;
   }
 
   img {
@@ -124,7 +124,7 @@
   background-repeat: repeat-x;
 
   &:hover {
-    background: $navbarButtonBackgroundHighlight;
+    background: $side-menu-bg;
     color: $link-color;
   }
 
