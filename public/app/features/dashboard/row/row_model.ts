@@ -33,7 +33,11 @@ export class DashboardRow {
   }
 
   getSaveModel() {
+    this.model = {};
     assignModelProperties(this.model, this, this.defaults);
+
+    // remove properties that dont server persisted purpose
+    delete this.model.isNew;
     return this.model;
   }
 
@@ -44,11 +48,11 @@ export class DashboardRow {
     }
   }
 
-  panelSpanChanged() {
+  panelSpanChanged(alwaysSendEvent?) {
     var oldSpan = this.span;
     this.updateRowSpan();
 
-    if (oldSpan !== this.span) {
+    if (alwaysSendEvent || oldSpan !== this.span) {
       this.events.emit('span-changed');
     }
   }

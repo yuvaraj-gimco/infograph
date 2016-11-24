@@ -22,9 +22,7 @@ export function dashMenuDirective() {
     },
     link: function(scope, elem) {
       elem.click(function() {
-
-        elem.toggleClass('navbar-dash-btn--open');
-
+        elem.toggleClass('navbar-page-btn--open');
       });
     }
   };

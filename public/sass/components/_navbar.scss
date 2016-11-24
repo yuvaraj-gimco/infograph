@@ -146,23 +146,32 @@
   }
 }
 
-.navbar-dash-btn {
+.navbar-page-btn-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.navbar-page-btn {
   position: relative;
   cursor: pointer;
   overflow: visible;
 
   &--open {
     .slide-menu {
-      transform: translate(0, 11px);
+      opacity: 1;
+      visibility: visible;
     }
   }
 }
 
 .slide-menu {
+  min-width: 100%;
   font-size: $font-size-sm;
+  visibility: hidden;
   position: absolute;
-  transform: translate(0, -250px);
-  transition: 0.2s ease-out 0.0s;
+  transform: translate(-15px, 13px);
+  opacity: 0;
+  transition: opacity 0.2s ease-out 0.0s;
   z-index: 99;
   background: $side-menu-bg;
   list-style: none;

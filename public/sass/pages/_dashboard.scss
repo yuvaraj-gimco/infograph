@@ -13,33 +13,7 @@
   color: $variable;
 }
 
-.playlist-active {
-  .add-row-panel-hint,
-  .dashnav-refresh-action,
-  .dashnav-zoom-out,
-  .dashnav-action-icons,
-  .dash-row-menu,
-  .dashnav-move-timeframe  {
-    display: none;
-  }
 
-  .grafana-menu-stop-playlist {
-    display: list-item;
-  }
-}
-
-.hide-controls {
-  .add-row-panel-hint {
-    display: none;
-  }
-  .dash-row-menu {
-    display: none;
-  }
-  .resize-panel-handle,
-  .panel-drop-zone {
-    visibility: hidden;
-  }
-}
 
 div.flot-text {
   color: $text-color !important;
@@ -48,6 +22,15 @@ div.flot-text {
 .panel {
   display: inline-block;
   float: left;
+
+  &--solo {
+    .resize-panel-handle {
+      display: none;
+    }
+    .panel-container {
+      border: none;
+    }
+  }
 }
 
 .panel-margin {
@@ -189,6 +172,12 @@ div.flot-text {
   }
 }
 
+.panel-in-fullscreen {
+  .panel-drop-zone {
+    display: none !important;
+  }
+}
+
 .panel-time-info {
   font-weight: bold;
   float: right;
@@ -229,5 +218,3 @@ div.flot-text {
     padding: 0.5rem .5rem .2rem .5rem;
   }
 }
-
-

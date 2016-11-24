@@ -103,6 +103,10 @@ func GetAlerts(c *middleware.Context) Response {
 
 // POST /api/alerts/test
 func AlertTest(c *middleware.Context, dto dtos.AlertTestCommand) Response {
+	if _, idErr := dto.Dashboard.Get("id").Int64(); idErr != nil {
+		return ApiError(400, "The dashboard needs to be saved at least once before you can test an alert rule", nil)
+	}
+
 	backendCmd := alerting.AlertTestCommand{
 		OrgId:     c.OrgId,
 		Dashboard: dto.Dashboard,
@@ -119,7 +123,8 @@ func AlertTest(c *middleware.Context, dto dtos.AlertTestCommand) Response {
 	res := backendCmd.Result
 
 	dtoRes := &dtos.AlertTestResult{
-		Firing: res.Firing,
+		Firing:         res.Firing,
+		ConditionEvals: res.ConditionEvals,
 	}
 
 	if res.Error != nil {
@@ -175,10 +180,10 @@ func GetAlertNotifications(c *middleware.Context) Response {
 		return ApiError(500, "Failed to get alert notifications", err)
 	}
 
-	var result []dtos.AlertNotification
+	result := make([]*dtos.AlertNotification, 0)
 
 	for _, notification := range query.Result {
-		result = append(result, dtos.AlertNotification{
+		result = append(result, &dtos.AlertNotification{
 			Id:        notification.Id,
 			Name:      notification.Name,
 			Type:      notification.Type,
