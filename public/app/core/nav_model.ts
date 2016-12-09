@@ -15,6 +15,22 @@ export class NavModel {
       ]
     };
   }
+
+  getDashboardNav(dashboard) {
+    return {
+      section: {
+        title: dashboard.title,
+        icon: 'icon-gf icon-gf-dashboard'
+      },
+      navItems: [
+        {title: 'Settings', click: '', icon: 'fa fa-cog'},
+        {title: 'Templating', click: '', icon: 'fa fa-code'},
+        {title: 'Annotations', click: '', icon: 'fa fa-bolt'},
+        {title: 'View JSON', click: '', icon: 'fa fa-eye'},
+        {title: 'Save As', click: '', icon: 'fa fa-save'},
+      ]
+    };
+  }
 }
 
 

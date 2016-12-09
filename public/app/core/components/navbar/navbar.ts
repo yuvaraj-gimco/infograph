@@ -10,6 +10,7 @@ import './menu';
 export class NavbarCtrl {
   model: any;
   section: any;
+  isSearching: boolean;
 
   /** @ngInject */
   constructor(private $rootScope, private contextSrv) {
@@ -17,7 +18,9 @@ export class NavbarCtrl {
   }
 
   showSearch() {
+    console.log('show search');
     this.$rootScope.appEvent('show-dash-search');
+    this.isSearching = !this.isSearching;
   }
 }
 

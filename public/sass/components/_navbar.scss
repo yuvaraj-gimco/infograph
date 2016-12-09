@@ -154,6 +154,7 @@
 .navbar-dropdown-menu {
   position: absolute;
   top: 100%;
+  width: 100%;
   left: 0;
   z-index: $zindex-dropdown;
   visibility: hidden;
@@ -164,6 +165,7 @@
   margin: 2px 0 0; // override default ul
   list-style: none;
   background: $side-menu-bg;
+  box-shadow: 1px 1px 5px #040404;
 
   li a {
     display: block;
@@ -171,6 +173,7 @@
     color: $text-muted;
     padding: $spacer/2 $spacer;
     border-left: 2px solid $side-menu-bg;
+
     i {
       display: inline-block;
       padding-right: $spacer/2;
