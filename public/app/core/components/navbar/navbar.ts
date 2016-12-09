@@ -5,10 +5,15 @@ import _ from 'lodash';
 import $ from 'jquery';
 import coreModule from '../../core_module';
 
+import './menu';
+
 export class NavbarCtrl {
+  model: any;
+  section: any;
 
   /** @ngInject */
   constructor(private $rootScope, private contextSrv) {
+    this.section = this.model.section;
   }
 
   showSearch() {
@@ -25,12 +30,9 @@ export function navbarDirective() {
     transclude: true,
     controllerAs: 'ctrl',
     scope: {
-      title: "@",
-      titleUrl: "@",
-      iconUrl: "@",
+      model: "=",
     },
-    link: function(scope, elem, attrs, ctrl) {
-      ctrl.icon = attrs.icon;
+    link: function(scope, elem) {
       elem.addClass('navbar');
     }
   };

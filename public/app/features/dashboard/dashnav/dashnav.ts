@@ -6,8 +6,6 @@ import angular from 'angular';
 
 import {DashboardExporter} from '../export/exporter';
 
-import './menu';
-
 export class DashNavCtrl {
 
   /** @ngInject */
